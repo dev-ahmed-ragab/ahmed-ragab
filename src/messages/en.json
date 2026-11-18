@@ -1,0 +1,83 @@
+{
+  "nav": {
+    "projects": "Projects",
+    "experience": "Experience",
+    "skills": "Tech Stack",
+    "contact": "Contact",
+    "resume": "Download CV",
+    "status": "Available for High-Impact Contracts"
+  },
+  "hero": {
+    "badge": "Available for High-Impact Remote Contracts",
+    "tagline": "Full-Stack Product Engineer & Technical Founder",
+    "headline": "Crafting Scalable Systems Across the Digital Cosmos",
+    "subheadline": "Bridging mechatronics precision with modern full-stack web engineering. Architecting high-converting SaaS, real-time engines, and desktop-grade web applications.",
+    "ctaProjects": "Explore Flight Log",
+    "ctaResume": "Download CV",
+    "quickStats": {
+      "experience": "3+ Years Web Dev",
+      "specialty": "Next.js & TypeScript",
+      "architecture": "Full-Stack & Systems"
+    }
+  },
+  "projects": {
+    "badge": "Orbital Stations",
+    "title": "Featured Flagship Projects",
+    "description": "Production systems engineered for performance, security, and exceptional user experience.",
+    "viewDemo": "Live Demo",
+    "viewCode": "Source Code",
+    "keyMetrics": "Key Engineering Metrics",
+    "coreHighlights": "Core Highlights",
+    "archiveCta": "Explore Full Project Archive & Labs (10+ Projects)",
+    "archiveBadge": "Complete Engineering Backlog"
+  },
+  "archive": {
+    "title": "Complete Project Archive",
+    "description": "A comprehensive index of production projects, freelance work, and engineering experiments developed since 2021.",
+    "searchPlaceholder": "Filter projects by title or tech stack...",
+    "allCategories": "All Categories",
+    "close": "Close Archive",
+    "year": "Year",
+    "project": "Project",
+    "category": "Category",
+    "stack": "Tech Stack",
+    "links": "Links"
+  },
+  "experience": {
+    "badge": "Mission Logs",
+    "title": "Career Milestones & Engineering Impact",
+    "description": "A chronological path from self-directed foundation to scaling SaaS platforms and enterprise contract systems.",
+    "keyAchievements": "Key Technical Contributions:"
+  },
+  "skills": {
+    "badge": "Propulsion Core",
+    "title": "Technical Systems & Architecture",
+    "description": "The battle-tested technologies and tools power my daily engineering workflow."
+  },
+  "contact": {
+    "badge": "Mission Control",
+    "title": "Initiate Subspace Transmission",
+    "description": "Available for strategic remote full-stack roles, contract engineering, and high-impact Next.js/React technical products.",
+    "emailLabel": "Direct Email",
+    "locationLabel": "Base Location",
+    "statusLabel": "Availability",
+    "statusValue": "🟢 Open for Remote Contracts & Global Opportunities",
+    "sendEmail": "Send an Email",
+    "downloadCv": "Download Curriculum Vitae (PDF)",
+    "connectLinkedIn": "Connect on LinkedIn",
+    "browseGitHub": "Inspect GitHub Repos"
+  },
+  "footer": {
+    "rights": "Crafted with precision by Ahmed Ragab. All rights reserved.",
+    "builtWith": "Engineered with Next.js 15, TypeScript, Tailwind CSS, and GSAP."
+  },
+  "theme": {
+    "title": "Cosmic Theme",
+    "deepSpace": "Deep Space",
+    "deepSpaceDesc": "Cosmic Void & Violet / Cyan",
+    "midnightViolet": "Midnight Violet",
+    "midnightVioletDesc": "Mystic Nebula & Magenta",
+    "abyssCyan": "Abyss Cyan",
+    "abyssCyanDesc": "Oceanic Space & Cyan"
+  }
+}
