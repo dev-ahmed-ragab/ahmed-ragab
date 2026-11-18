@@ -11,13 +11,12 @@ import {
   ExternalLink,
   Compass,
   CheckCircle2,
-  TrendingUp,
   ChevronRight,
   Layers,
   Lock,
+  Zap,
 } from "lucide-react";
 import { OrbitalStation } from "@/components/cosmic/CelestialElements";
-import { LottiePlayer } from "@/components/cosmic/LottiePlayer";
 
 export function ProjectsSection() {
   const t = useTranslations("projects");
@@ -29,7 +28,7 @@ export function ProjectsSection() {
   const pinnedProjects = projects.filter((p) => p.pinned);
 
   return (
-    <section id="projects" className="relative py-20 sm:py-24 px-4 sm:px-6 lg:px-8 w-full overflow-hidden">
+    <section id="projects" className="relative py-20 sm:py-28 px-4 sm:px-6 lg:px-8 w-full overflow-hidden">
       {/* Background radial glow */}
       <div className="absolute top-1/2 start-0 w-[350px] sm:w-[450px] h-[350px] sm:h-[450px] bg-nebula-violet/10 rounded-full blur-[120px] sm:blur-[140px] pointer-events-none" />
 
@@ -55,21 +54,21 @@ export function ProjectsSection() {
           </p>
         </div>
 
-        {/* Flagship Projects Grid */}
+        {/* Flagship Projects Grid — Impeccable Single-Surface Architecture */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 w-full">
           {pinnedProjects.map((project, idx) => (
             <div
               key={project.id}
-              className="glass-panel glass-panel-hover rounded-2xl p-5 sm:p-8 flex flex-col justify-between border border-white/10 relative overflow-hidden group w-full"
+              className="group relative rounded-2xl bg-space-900/40 hover:bg-space-900/70 border border-white/10 hover:border-nebula-cyan/40 p-6 sm:p-8 flex flex-col justify-between transition-all duration-300 shadow-lg hover:shadow-2xl hover:shadow-nebula-cyan/10 backdrop-blur-md"
             >
-              {/* Subtle accent corner glow */}
-              <div className="absolute top-0 end-0 w-32 h-32 bg-gradient-to-bl from-nebula-indigo/20 to-transparent pointer-events-none" />
+              {/* Subtle top accent gradient line */}
+              <div className="absolute top-0 inset-x-8 h-px bg-gradient-to-r from-transparent via-nebula-cyan/30 to-transparent group-hover:via-nebula-cyan/70 transition-all" />
 
-              <div className="space-y-5 sm:space-y-6">
-                {/* Header row: Category, Year & Index */}
-                <div className="flex items-center justify-between flex-wrap gap-2">
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs font-mono font-semibold text-nebula-cyan bg-nebula-cyan/10 border border-nebula-cyan/25 px-2.5 py-1 rounded-md">
+              <div className="space-y-5">
+                {/* Header row: Category & Orbit Index */}
+                <div className="flex items-center justify-between gap-3">
+                  <div className="flex items-center gap-2.5">
+                    <span className="text-xs font-mono font-bold text-nebula-cyan bg-nebula-cyan/10 border border-nebula-cyan/25 px-2.5 py-1 rounded-lg">
                       {project.category}
                     </span>
                     <span className="text-xs font-mono text-slate-400">
@@ -77,34 +76,10 @@ export function ProjectsSection() {
                     </span>
                   </div>
 
-                  <span className="text-xs font-mono text-slate-500 font-bold">
+                  <span className="text-xs font-mono text-slate-500 font-semibold tracking-wider">
                     0{idx + 1} // ORBIT
                   </span>
                 </div>
-
-                {/* Flagship Developer Interactive Companion (Iqraa) */}
-                {project.id === "iqraa" && (
-                  <div className="relative flex items-center justify-between p-3.5 rounded-xl bg-space-950/80 border border-nebula-cyan/30 shadow-lg shadow-nebula-cyan/5 overflow-hidden">
-                    <div className="space-y-1.5 z-10">
-                      <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-nebula-cyan/15 text-nebula-cyan text-[10px] font-mono font-bold uppercase tracking-wider border border-nebula-cyan/20">
-                        <span className="w-1.5 h-1.5 rounded-full bg-nebula-cyan animate-ping" />
-                        Founder & System Architect
-                      </div>
-                      <p className="text-xs text-slate-300 font-mono">
-                        Cosmic SaaS Architecture • 100+ Live Users
-                      </p>
-                    </div>
-                    <div className="relative w-24 h-24 sm:w-28 sm:h-28 shrink-0 -my-3 group-hover:scale-105 transition-transform duration-300">
-                      <div className="absolute inset-0 rounded-full bg-nebula-cyan/20 blur-md pointer-events-none" />
-                      <LottiePlayer
-                        src="/lottie/space_boy_developer.json"
-                        loop
-                        autoplay
-                        className="w-full h-full object-contain pointer-events-none"
-                      />
-                    </div>
-                  </div>
-                )}
 
                 {/* Title & Subtitle */}
                 <div className="space-y-1.5">
@@ -121,45 +96,36 @@ export function ProjectsSection() {
                   {project.description[locale]}
                 </p>
 
-                {/* Key Metrics Strip */}
-                <div className="p-3.5 rounded-xl border border-white/5 bg-space-950/60 space-y-2">
-                  <div className="flex items-center gap-1.5 text-[11px] font-mono font-bold text-slate-400 uppercase tracking-wider">
-                    <TrendingUp className="w-3.5 h-3.5 text-nebula-emerald" />
-                    <span>{t("keyMetrics")}</span>
-                  </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                    {project.metrics[locale].map((metric) => (
-                      <div
-                        key={metric}
-                        className="text-xs font-semibold text-white bg-white/5 px-2.5 py-1.5 rounded-lg border border-white/5 break-words"
-                      >
-                        {metric}
-                      </div>
-                    ))}
-                  </div>
+                {/* Clean Metrics Strip (No nested card wrappers) */}
+                <div className="flex flex-wrap items-center gap-2 pt-1">
+                  {project.metrics[locale].map((metric) => (
+                    <span
+                      key={metric}
+                      className="inline-flex items-center gap-1.5 text-xs font-mono text-emerald-300 bg-emerald-950/40 border border-emerald-500/20 px-2.5 py-1 rounded-md"
+                    >
+                      <Zap className="w-3 h-3 text-nebula-emerald" />
+                      <span>{metric}</span>
+                    </span>
+                  ))}
                 </div>
 
-                {/* Engineering Highlights */}
-                <div className="space-y-2">
-                  <div className="text-xs font-mono font-bold text-slate-400 uppercase tracking-wider">
-                    {t("coreHighlights")}
-                  </div>
-                  <ul className="space-y-2">
-                    {project.highlights[locale].map((highlight, hIdx) => (
-                      <li
-                        key={hIdx}
-                        className="text-xs text-slate-300 flex items-start gap-2.5 leading-relaxed"
-                      >
-                        <CheckCircle2 className="w-3.5 h-3.5 text-nebula-cyan shrink-0 mt-0.5" />
-                        <span>{highlight}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                {/* Clean Highlights (Direct bullet list, no nested container) */}
+                <ul className="space-y-2 pt-1">
+                  {project.highlights[locale].slice(0, 2).map((highlight, hIdx) => (
+                    <li
+                      key={hIdx}
+                      className="text-xs text-slate-300 flex items-start gap-2.5 leading-relaxed"
+                    >
+                      <CheckCircle2 className="w-3.5 h-3.5 text-nebula-cyan shrink-0 mt-0.5" />
+                      <span>{highlight}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
 
-              {/* Bottom row: Tech Stack & Action Links */}
+              {/* Bottom row: Tech Stack & 3 Clean Action Buttons */}
               <div className="pt-6 mt-6 border-t border-white/10 flex flex-col gap-4">
+                {/* Tech Pills */}
                 <div className="flex flex-wrap gap-1.5 w-full">
                   {project.stack.map((stk) => (
                     <span
@@ -171,9 +137,9 @@ export function ProjectsSection() {
                   ))}
                 </div>
 
-                {/* 3 Action Buttons (Mobile friendly >= 44px) */}
+                {/* 3 Action Buttons */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 w-full pt-1">
-                  {/* Button 1: Live Link */}
+                  {/* Button 1: Live Demo */}
                   {project.links.demo ? (
                     <Button
                       asChild
@@ -250,7 +216,7 @@ export function ProjectsSection() {
           ))}
         </div>
 
-        {/* Explore Full Archive CTA Button (Min 48px Touch Target) */}
+        {/* Explore Full Archive CTA Button */}
         <div className="mt-12 sm:mt-16 flex justify-center w-full">
           <Button
             onClick={() => setArchiveOpen(true)}

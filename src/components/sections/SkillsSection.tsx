@@ -3,7 +3,6 @@
 import { useTranslations, useLocale } from "next-intl";
 import { skillCategories } from "@/data/skills";
 import { TechIcon } from "@/components/ui/TechIcon";
-import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Cpu, Zap } from "lucide-react";
 import { LottiePlanet } from "@/components/cosmic/CelestialElements";
@@ -13,12 +12,12 @@ export function SkillsSection() {
   const locale = useLocale() as "en" | "ar";
 
   return (
-    <section id="skills" className="relative py-20 sm:py-24 px-4 sm:px-6 lg:px-8 border-t border-white/5 w-full overflow-hidden">
+    <section id="skills" className="relative py-20 sm:py-28 px-4 sm:px-6 lg:px-8 border-t border-white/5 w-full overflow-hidden">
       {/* Background glow */}
-      <div className="absolute top-1/2 start-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] sm:w-[600px] h-[350px] sm:h-[600px] bg-nebula-indigo/8 rounded-full blur-[120px] sm:blur-[150px] pointer-events-none" />
+      <div className="absolute top-1/2 start-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] sm:w-[600px] h-[350px] sm:h-[600px] bg-nebula-indigo/8 rounded-full blur-[140px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative z-10 w-full">
-        {/* Propulsion Core Rotating Lottie Planet Landmark */}
+        {/* Propulsion Core Rotating Lottie Planet */}
         <div className="absolute top-0 end-0 hidden sm:block pointer-events-none opacity-90 -translate-y-4">
           <LottiePlanet size={145} glowColor="cyan" speed={0.7} />
         </div>
@@ -42,12 +41,12 @@ export function SkillsSection() {
           </p>
         </div>
 
-        {/* Skill Category Cards */}
+        {/* Skill Category Cards — Impeccable Single Surface with Dividers */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 w-full">
           {skillCategories.map((category) => (
-            <Card
+            <div
               key={category.id}
-              className="glass-panel glass-panel-hover rounded-2xl p-5 sm:p-7 border border-white/10 flex flex-col justify-between space-y-6 group w-full"
+              className="rounded-2xl bg-space-900/40 border border-white/10 p-6 sm:p-7 flex flex-col justify-between space-y-6 group backdrop-blur-md hover:border-nebula-cyan/30 transition-all shadow-lg"
             >
               <div className="space-y-3">
                 <div className="flex items-center gap-2.5">
@@ -64,13 +63,10 @@ export function SkillsSection() {
                 </p>
               </div>
 
-              {/* Skills list inside this category */}
-              <div className="space-y-3 pt-2">
+              {/* Clean divider list (No nested cards) */}
+              <div className="divide-y divide-white/5 pt-2">
                 {category.skills.map((skill) => (
-                  <div
-                    key={skill.name}
-                    className="p-3 sm:p-3.5 rounded-xl border border-white/5 bg-space-950/60 hover:border-white/15 transition-colors space-y-1.5"
-                  >
+                  <div key={skill.name} className="py-3 first:pt-0 last:pb-0 space-y-1">
                     <div className="flex items-center justify-between gap-2">
                       <div className="flex items-center gap-2">
                         <TechIcon
@@ -81,21 +77,18 @@ export function SkillsSection() {
                           {skill.name}
                         </span>
                       </div>
-                      <Badge
-                        variant="cosmicViolet"
-                        className="text-[10px] px-2 py-0.5 shrink-0"
-                      >
+                      <span className="text-[10px] font-mono text-nebula-violet/90 bg-nebula-violet/10 px-2 py-0.5 rounded">
                         {skill.level}
-                      </Badge>
+                      </span>
                     </div>
 
-                    <p className="text-[11px] text-slate-400 leading-normal ps-6">
+                    <p className="text-[11px] text-slate-400 leading-relaxed ps-6">
                       {skill.description[locale]}
                     </p>
                   </div>
                 ))}
               </div>
-            </Card>
+            </div>
           ))}
         </div>
       </div>

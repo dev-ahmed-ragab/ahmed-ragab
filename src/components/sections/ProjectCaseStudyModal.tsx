@@ -21,8 +21,6 @@ import {
   CheckCircle2,
   TrendingUp,
   Cpu,
-  X,
-  Code2,
 } from "lucide-react";
 
 interface ProjectCaseStudyModalProps {
@@ -45,7 +43,7 @@ export function ProjectCaseStudyModal({
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="w-[95vw] max-w-4xl max-h-[90vh] flex flex-col p-0 overflow-hidden bg-space-950 border border-white/15 shadow-2xl shadow-nebula-indigo/30">
+      <DialogContent className="w-[95vw] max-w-4xl max-h-[88vh] flex flex-col p-0 overflow-hidden bg-space-950 border border-white/15 shadow-2xl shadow-nebula-indigo/30">
         {/* Modal Header */}
         <DialogHeader className="p-5 sm:p-7 border-b border-white/10 bg-space-900/60 backdrop-blur-md relative z-10 text-start space-y-2">
           <div className="flex items-center justify-between flex-wrap gap-2">
@@ -74,55 +72,52 @@ export function ProjectCaseStudyModal({
 
         {/* Scrollable Body Content */}
         <div className="flex-1 overflow-y-auto p-5 sm:p-7 space-y-6 sm:space-y-8">
-          {/* Visual Blueprint / Mockup Container */}
+          {/* Visual Blueprint / Impact Overview Banner */}
           <div
-            className={`w-full rounded-2xl border border-white/10 p-6 sm:p-8 relative overflow-hidden flex flex-col justify-between min-h-[180px] sm:min-h-[220px] ${
+            className={`w-full rounded-2xl border border-white/10 p-6 sm:p-8 relative overflow-hidden flex flex-col justify-between min-h-[160px] ${
               cs?.mockupGradient || "bg-gradient-to-br from-space-900 via-space-950 to-nebula-indigo/20"
             }`}
           >
-            {/* Ambient corner glow */}
-            <div className="absolute top-0 end-0 w-64 h-64 bg-nebula-cyan/15 rounded-full blur-3xl pointer-events-none" />
-
             <div className="flex items-center justify-between gap-2 relative z-10">
               <div className="flex items-center gap-2">
-                <span className="w-3 h-3 rounded-full bg-red-500/80" />
-                <span className="w-3 h-3 rounded-full bg-amber-500/80" />
-                <span className="w-3 h-3 rounded-full bg-emerald-500/80" />
+                <span className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
+                <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
                 <span className="text-[11px] font-mono text-slate-400 ms-2">
                   system://{project.slug}.cloud
                 </span>
               </div>
               <Badge variant="cosmicCyan" className="text-[11px] font-mono">
-                {cs?.mockupBadge || "Live Architecture"}
+                {cs?.mockupBadge || "Production Architecture"}
               </Badge>
             </div>
 
-            <div className="relative z-10 my-4 space-y-2">
-              <div className="text-lg sm:text-xl font-bold text-white">
+            <div className="relative z-10 my-3">
+              <div className="text-base sm:text-lg font-bold text-white leading-relaxed">
                 {cs?.overview[locale] || project.description[locale]}
               </div>
             </div>
 
-            {/* Quick Metrics Bar inside Mockup */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 relative z-10 pt-2 border-t border-white/10">
+            {/* Quick Metrics Bar */}
+            <div className="flex flex-wrap items-center gap-2 relative z-10 pt-2 border-t border-white/10">
               {project.metrics[locale].map((m, idx) => (
-                <div
+                <span
                   key={idx}
-                  className="px-3 py-1.5 rounded-lg bg-black/40 border border-white/10 text-xs font-mono font-semibold text-cyan-200"
+                  className="px-2.5 py-1 rounded-md bg-black/40 border border-white/10 text-xs font-mono font-semibold text-cyan-200"
                 >
                   ⚡ {m}
-                </div>
+                </span>
               ))}
             </div>
           </div>
 
-          {/* Problem vs. Solution Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+          {/* Problem vs. Solution 2-Column Split (Clean Impeccable Typography) */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* The Challenge / Problem */}
-            <div className="p-5 rounded-2xl border border-red-500/20 bg-red-500/[0.03] space-y-3">
+            <div className="space-y-2">
               <div className="flex items-center gap-2 text-red-400 font-mono text-xs font-bold uppercase tracking-wider">
                 <AlertCircle className="w-4 h-4 shrink-0" />
-                <span>{isAr ? "التحدي الهندسي (The Problem)" : "The Engineering Challenge"}</span>
+                <span>{isAr ? "التحدي الهندسي (The Challenge)" : "The Engineering Challenge"}</span>
               </div>
               <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
                 {cs?.problem[locale] ||
@@ -133,7 +128,7 @@ export function ProjectCaseStudyModal({
             </div>
 
             {/* The Solution */}
-            <div className="p-5 rounded-2xl border border-nebula-emerald/30 bg-nebula-emerald/[0.04] space-y-3">
+            <div className="space-y-2">
               <div className="flex items-center gap-2 text-nebula-emerald font-mono text-xs font-bold uppercase tracking-wider">
                 <Lightbulb className="w-4 h-4 shrink-0" />
                 <span>{isAr ? "الحل المعماري (The Solution)" : "The Engineered Solution"}</span>
@@ -149,7 +144,7 @@ export function ProjectCaseStudyModal({
 
           {/* Core Architectural Pillars */}
           {cs?.architecture && (
-            <div className="space-y-3">
+            <div className="space-y-3 pt-2">
               <div className="flex items-center gap-2 text-xs font-mono text-nebula-cyan font-bold uppercase tracking-wider">
                 <Layers className="w-4 h-4 shrink-0" />
                 <span>
@@ -191,7 +186,7 @@ export function ProjectCaseStudyModal({
           </div>
         </div>
 
-        {/* 3 Bottom Action Buttons Required by User */}
+        {/* 3 Bottom Action Buttons */}
         <div className="p-4 sm:p-5 border-t border-white/10 bg-space-900/80 backdrop-blur-md flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
           {/* Notice about repo if private / commercial */}
           <div className="text-xs font-mono text-slate-400">
@@ -200,7 +195,7 @@ export function ProjectCaseStudyModal({
             ) : (
               <span className="text-amber-400 flex items-center gap-1.5">
                 <Lock className="w-3.5 h-3.5" />
-                <span>{project.githubNotice?.[locale] || (isAr ? "مشروع خاص تجاري / كود مغلق" : "Private Commercial Repo")}</span>
+                <span>{project.githubNotice?.[locale] || (isAr ? "مشروع تجاري خاص / كود مغلق" : "Private Commercial Repo")}</span>
               </span>
             )}
           </div>
@@ -228,7 +223,7 @@ export function ProjectCaseStudyModal({
                 variant="cosmicOutline"
                 size="sm"
                 disabled
-                className="flex-1 sm:flex-none min-h-[44px] px-4 rounded-xl text-xs font-semibold gap-2 opacity-50 cursor-not-allowed"
+                className="flex-1 sm:flex-none min-h-[44px] px-4 rounded-xl text-xs font-semibold gap-2 opacity-50 cursor-not-allowed border-dashed"
                 title={project.githubNotice?.[locale] || "Proprietary Codebase"}
               >
                 <Lock className="w-3.5 h-3.5" />

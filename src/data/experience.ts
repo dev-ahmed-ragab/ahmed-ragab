@@ -200,6 +200,47 @@ export const experiences: ExperienceItem[] = [
     technologies: ["React.js", "JavaScript (ES6+)", "Tailwind CSS", "Git", "Figma", "Agile/Scrum"],
   },
   {
+    id: "freelance-wordpress",
+    role: {
+      en: "Freelance Full-Stack & WordPress Engineer",
+      ar: "مطور برمجيات حر ومتخصص ووردبريس",
+    },
+    company: {
+      en: "Independent Freelance & Agency Clients",
+      ar: "مشاريع مستقلة وعملاء تجاريين",
+    },
+    location: {
+      en: "Remote",
+      ar: "عن بُعد",
+    },
+    period: {
+      en: "2023 – 2024",
+      ar: "2023 – 2024",
+    },
+    type: "Freelance",
+    badge: {
+      en: "Client Delivery & WordPress",
+      ar: "مشاريع عملاء وووردبريس",
+    },
+    description: {
+      en: "Delivered bespoke commercial websites, custom WordPress themes, PHP logic, and high-converting landing pages for businesses and agencies.",
+      ar: "تطوير مواقع تجارية مخصصة وقوالب ووردبريس فريدة بلغة PHP وصفحات هبوط لتحويل واستقطاب العملاء لشركات ومؤسسات مختلفة.",
+    },
+    achievements: {
+      en: [
+        "Architected custom WordPress real estate and agency themes with Custom Post Types and speed optimizations.",
+        "Integrated dynamic forms, lead capture webhooks, and WhatsApp click-to-chat business flows.",
+        "Delivered responsive mobile-first UI with sub-second initial load speeds on budget hosting.",
+      ],
+      ar: [
+        "بناء قوالب ووردبريس مخصصة للشركات العقارية والمؤسسات بأنواع بيانات مخصصة (CPTs) وسرعة تحميل فائقة.",
+        "دمج نماذج التواصل الفورية وتحويل طلبات العملاء مباشرة للواتساب والبريد الإلكتروني.",
+        "تصميم واجهات متجاوبة للهواتف مع تحسين الأداء ومؤشرات Web Vitals على الاستضافات المشتركة.",
+      ],
+    },
+    technologies: ["WordPress", "PHP", "Elementor", "Custom Themes", "JavaScript", "Tailwind CSS", "MySQL"],
+  },
+  {
     id: "mechatronics-degree",
     role: {
       en: "Bachelor of Engineering — Mechatronics Engineering",

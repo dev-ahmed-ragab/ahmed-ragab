@@ -3,9 +3,9 @@
 import { useState } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { siteConfig } from "@/config/site";
-import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { GitHubIcon, LinkedInIcon } from "@/components/ui/BrandIcons";
 import {
   Radio,
   Mail,
@@ -16,6 +16,7 @@ import {
   CheckCircle2,
   AlertCircle,
   Sparkles,
+  MapPin,
 } from "lucide-react";
 import { LottieSatellite } from "@/components/cosmic/CelestialElements";
 
@@ -77,18 +78,18 @@ export function ContactSection() {
   };
 
   return (
-    <section id="contact" className="relative py-20 sm:py-24 px-4 sm:px-6 lg:px-8 border-t border-white/5 w-full overflow-hidden">
+    <section id="contact" className="relative py-20 sm:py-28 px-4 sm:px-6 lg:px-8 border-t border-white/5 w-full overflow-hidden">
       {/* Background glow */}
-      <div className="absolute bottom-0 start-1/2 -translate-x-1/2 w-[350px] sm:w-[500px] h-[250px] sm:h-[350px] bg-nebula-violet/10 rounded-full blur-[120px] sm:blur-[140px] pointer-events-none" />
+      <div className="absolute bottom-0 start-1/2 -translate-x-1/2 w-[350px] sm:w-[550px] h-[250px] sm:h-[350px] bg-nebula-violet/10 rounded-full blur-[140px] pointer-events-none" />
 
-      <div className="max-w-5xl mx-auto relative z-10 w-full">
+      <div className="max-w-6xl mx-auto relative z-10 w-full space-y-12">
         {/* Subspace Transmission Station Lottie Satellite */}
-        <div className="absolute -top-8 end-4 hidden sm:block pointer-events-none opacity-90">
+        <div className="absolute -top-8 end-4 hidden sm:block pointer-events-none opacity-80">
           <LottieSatellite size={135} direction="left" speed={0.8} />
         </div>
 
         {/* Section Header */}
-        <div className="flex flex-col items-center text-center mb-12 sm:mb-16 space-y-3">
+        <div className="flex flex-col items-start space-y-3">
           <Badge
             variant="cosmicCyan"
             className="gap-2 px-3 py-1 font-mono text-xs uppercase tracking-wider rounded-full"
@@ -106,23 +107,122 @@ export function ContactSection() {
           </p>
         </div>
 
-        {/* Transmission Hub Card */}
-        <Card className="glass-panel rounded-3xl p-5 sm:p-8 md:p-10 border border-white/10 shadow-2xl space-y-8 w-full">
-          {/* Status strip */}
-          <div className="p-3.5 sm:p-4 rounded-xl border border-nebula-emerald/30 bg-nebula-emerald/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-start">
-            <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-nebula-emerald animate-ping shrink-0" />
-              <span className="text-xs font-bold text-emerald-300 font-mono">
-                {t("statusValue")}
-              </span>
+        {/* Impeccable 2-Column Transmission Hub (Clean, Zero Nested Boxes) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          {/* Left Column: Direct Channels & Status */}
+          <div className="lg:col-span-5 space-y-6">
+            {/* Live Availability Pill */}
+            <div className="p-4 rounded-2xl bg-space-900/50 border border-nebula-emerald/30 space-y-2">
+              <div className="flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-nebula-emerald animate-ping shrink-0" />
+                <span className="text-xs font-bold text-emerald-300 font-mono">
+                  {t("statusValue")}
+                </span>
+              </div>
+              <div className="flex items-center gap-2 text-xs font-mono text-slate-400">
+                <MapPin className="w-3.5 h-3.5 text-slate-500 shrink-0" />
+                <span>{siteConfig.location[locale]}</span>
+              </div>
             </div>
-            <span className="text-xs font-mono text-slate-400">
-              {siteConfig.location[locale]}
-            </span>
+
+            {/* Direct Channels List */}
+            <div className="space-y-3">
+              <div className="text-xs font-mono text-slate-400 uppercase tracking-wider">
+                {isAr ? "قنوات الاتصال المباشرة:" : "Direct Channels:"}
+              </div>
+
+              {/* Email */}
+              <a
+                href={`mailto:${siteConfig.email}`}
+                className="p-3.5 rounded-xl bg-space-900/40 hover:bg-space-900/80 border border-white/10 hover:border-nebula-cyan/40 transition-all flex items-center justify-between group"
+              >
+                <div className="flex items-center gap-3 min-w-0">
+                  <div className="w-9 h-9 rounded-lg bg-nebula-indigo/15 border border-nebula-indigo/30 flex items-center justify-center text-nebula-indigo shrink-0">
+                    <Mail className="w-4 h-4" />
+                  </div>
+                  <div className="min-w-0 text-start">
+                    <div className="text-[11px] font-mono text-slate-400">{t("emailLabel")}</div>
+                    <div className="text-xs sm:text-sm font-bold text-white group-hover:text-nebula-cyan transition-colors truncate">
+                      {siteConfig.email}
+                    </div>
+                  </div>
+                </div>
+                <Send className="w-4 h-4 text-slate-500 group-hover:text-nebula-cyan group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-all shrink-0 ms-2" />
+              </a>
+
+              {/* WhatsApp */}
+              <a
+                href="https://wa.me/201096097617"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-3.5 rounded-xl bg-space-900/40 hover:bg-space-900/80 border border-white/10 hover:border-emerald-500/40 transition-all flex items-center justify-between group"
+              >
+                <div className="flex items-center gap-3 min-w-0">
+                  <div className="w-9 h-9 rounded-lg bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shrink-0">
+                    <MessageCircle className="w-4 h-4" />
+                  </div>
+                  <div className="min-w-0 text-start">
+                    <div className="text-[11px] font-mono text-slate-400">WhatsApp</div>
+                    <div className="text-xs sm:text-sm font-bold text-white group-hover:text-emerald-400 transition-colors">
+                      (+20) 01096097617
+                    </div>
+                  </div>
+                </div>
+                <ExternalLink className="w-4 h-4 text-slate-500 group-hover:text-emerald-400 shrink-0 ms-2" />
+              </a>
+
+              {/* Download CV */}
+              <a
+                href={siteConfig.links.cv}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-3.5 rounded-xl bg-space-900/40 hover:bg-space-900/80 border border-white/10 hover:border-nebula-violet/40 transition-all flex items-center justify-between group"
+              >
+                <div className="flex items-center gap-3 min-w-0">
+                  <div className="w-9 h-9 rounded-lg bg-nebula-violet/15 border border-nebula-violet/30 flex items-center justify-center text-nebula-violet shrink-0">
+                    <Download className="w-4 h-4" />
+                  </div>
+                  <div className="min-w-0 text-start">
+                    <div className="text-[11px] font-mono text-slate-400">Curriculum Vitae</div>
+                    <div className="text-xs sm:text-sm font-bold text-white group-hover:text-nebula-violet transition-colors">
+                      {t("downloadCv")}
+                    </div>
+                  </div>
+                </div>
+                <ExternalLink className="w-4 h-4 text-slate-500 group-hover:text-nebula-violet shrink-0 ms-2" />
+              </a>
+            </div>
+
+            {/* Social Links Pill Bar */}
+            <div className="flex items-center gap-2.5 pt-2">
+              <Button
+                asChild
+                variant="cosmicOutline"
+                size="sm"
+                className="flex-1 min-h-[42px] rounded-xl text-xs font-semibold gap-2 border-white/10 hover:border-nebula-cyan/40 justify-center"
+              >
+                <a href={siteConfig.links.linkedin} target="_blank" rel="noopener noreferrer">
+                  <LinkedInIcon className="w-3.5 h-3.5 text-nebula-cyan" />
+                  <span>LinkedIn</span>
+                </a>
+              </Button>
+
+              <Button
+                asChild
+                variant="cosmicOutline"
+                size="sm"
+                className="flex-1 min-h-[42px] rounded-xl text-xs font-semibold gap-2 border-white/10 hover:border-nebula-violet/40 justify-center"
+              >
+                <a href={siteConfig.links.github} target="_blank" rel="noopener noreferrer">
+                  <GitHubIcon className="w-3.5 h-3.5 text-nebula-violet" />
+                  <span>GitHub</span>
+                </a>
+              </Button>
+            </div>
           </div>
 
-          {/* Interactive Direct Message Form (Powered by Resend Engine) */}
-          <div className="space-y-4">
+          {/* Right Column: Direct Message Transmission Form */}
+          <div className="lg:col-span-7 rounded-2xl bg-space-900/40 border border-white/10 p-6 sm:p-8 backdrop-blur-md space-y-5">
             <div className="flex items-center gap-2 text-xs font-mono font-bold text-nebula-cyan uppercase tracking-wider">
               <Sparkles className="w-3.5 h-3.5" />
               <span>{isAr ? "إرسال رسالة مباشرة (Resend Engine)" : "Dispatch Direct Transmission"}</span>
@@ -230,127 +330,7 @@ export function ContactSection() {
               </Button>
             </form>
           </div>
-
-          {/* Quick Contact Actions Grid */}
-          <div className="pt-6 border-t border-white/10 space-y-4">
-            <div className="text-xs font-mono text-slate-400">
-              {isAr ? "أو تواصل مباشرة عبر القنوات الرسمية:" : "Or connect directly via verified channels:"}
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4 w-full">
-              {/* Direct Email (Min 56px Touch Target) */}
-              <a
-                href={`mailto:${siteConfig.email}`}
-                className="p-4 sm:p-5 min-h-[56px] rounded-2xl border border-white/10 bg-space-950/70 hover:border-nebula-indigo/50 hover:bg-space-900/80 transition-all flex items-center justify-between group active:scale-[0.98]"
-              >
-                <div className="flex items-center gap-3 sm:gap-4 min-w-0">
-                  <div className="w-11 h-11 rounded-xl bg-nebula-indigo/15 border border-nebula-indigo/30 flex items-center justify-center text-nebula-indigo group-hover:scale-105 transition-transform shrink-0">
-                    <Mail className="w-5 h-5" />
-                  </div>
-                  <div className="min-w-0 text-start">
-                    <div className="text-xs font-mono text-slate-400">
-                      {t("emailLabel")}
-                    </div>
-                    <div className="text-xs sm:text-sm font-bold text-white group-hover:text-nebula-cyan transition-colors truncate">
-                      {siteConfig.email}
-                    </div>
-                  </div>
-                </div>
-                <Send className="w-4 h-4 text-slate-500 group-hover:text-nebula-cyan group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-all shrink-0 ms-2" />
-              </a>
-
-              {/* Download CV (Min 56px Touch Target) */}
-              <a
-                href={siteConfig.links.cv}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-4 sm:p-5 min-h-[56px] rounded-2xl border border-white/10 bg-space-950/70 hover:border-nebula-violet/50 hover:bg-space-900/80 transition-all flex items-center justify-between group active:scale-[0.98]"
-              >
-                <div className="flex items-center gap-3 sm:gap-4 min-w-0">
-                  <div className="w-11 h-11 rounded-xl bg-nebula-violet/15 border border-nebula-violet/30 flex items-center justify-center text-nebula-violet group-hover:scale-105 transition-transform shrink-0">
-                    <Download className="w-5 h-5" />
-                  </div>
-                  <div className="min-w-0 text-start">
-                    <div className="text-xs font-mono text-slate-400">
-                      Curriculum Vitae
-                    </div>
-                    <div className="text-xs sm:text-sm font-bold text-white group-hover:text-nebula-violet transition-colors truncate">
-                      {t("downloadCv")}
-                    </div>
-                  </div>
-                </div>
-                <ExternalLink className="w-4 h-4 text-slate-500 group-hover:text-nebula-violet group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-all shrink-0 ms-2" />
-              </a>
-            </div>
-          </div>
-
-          {/* Social Profiles Transmission (Touch Friendly >= 44px) */}
-          <div className="pt-6 border-t border-white/10 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 w-full">
-            <Button
-              asChild
-              variant="cosmicOutline"
-              size="lg"
-              className="w-full sm:w-auto min-h-[44px] rounded-xl px-5 py-2.5 text-xs font-semibold gap-2 border-white/10 hover:border-nebula-cyan/40 justify-center active:scale-[0.98]"
-            >
-              <a
-                href={siteConfig.links.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <svg
-                  role="img"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  className="w-4 h-4 text-nebula-cyan"
-                  aria-hidden="true"
-                >
-                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-                </svg>
-                <span>{t("connectLinkedIn")}</span>
-              </a>
-            </Button>
-
-            <Button
-              asChild
-              variant="cosmicOutline"
-              size="lg"
-              className="w-full sm:w-auto min-h-[44px] rounded-xl px-5 py-2.5 text-xs font-semibold gap-2 border-white/10 hover:border-nebula-violet/40 justify-center active:scale-[0.98]"
-            >
-              <a
-                href={siteConfig.links.github}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <svg
-                  role="img"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                  className="w-4 h-4 text-nebula-violet"
-                  aria-hidden="true"
-                >
-                  <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
-                </svg>
-                <span>{t("browseGitHub")}</span>
-              </a>
-            </Button>
-
-            <Button
-              asChild
-              variant="cosmicOutline"
-              size="lg"
-              className="w-full sm:w-auto min-h-[44px] rounded-xl px-5 py-2.5 text-xs font-semibold gap-2 border-white/10 hover:border-emerald-500/40 justify-center active:scale-[0.98]"
-            >
-              <a
-                href="https://wa.me/201096097617"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <MessageCircle className="w-4 h-4 text-emerald-400" />
-                <span>WhatsApp Direct</span>
-              </a>
-            </Button>
-          </div>
-        </Card>
+        </div>
       </div>
     </section>
   );

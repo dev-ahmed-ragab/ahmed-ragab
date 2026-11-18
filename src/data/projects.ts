@@ -143,7 +143,7 @@ export const projects: Project[] = [
       en: "Confidential Enterprise Contract (Protected by NDA)",
       ar: "مشروع تعاقدي خاص لشركة تحت اتفاقية سرية (NDA)",
     },
-    pinned: true,
+    pinned: false,
     featuredYear: "2025",
     highlights: {
       en: [
@@ -214,7 +214,7 @@ export const projects: Project[] = [
       en: "Client Academic Repository (Private Institutional Codebase)",
       ar: "مستودع خاص بالمؤسسة الأكاديمية الطبية",
     },
-    pinned: true,
+    pinned: false,
     featuredYear: "Late 2024 – 2025",
     highlights: {
       en: [
@@ -357,18 +357,50 @@ export const projects: Project[] = [
       en: "B-Labn — Restaurant & Order Management",
       ar: "بـ لبن — متجر وقائمة طلبات إلكترونية",
     },
-    subtitle: { en: "E-Commerce & Ordering UI", ar: "منصة طلبات وقوائم طعام" },
+    subtitle: { en: "E-Commerce & Ordering UI", ar: "منصة طلبات وقوائم طعام تفاعلية" },
     description: {
-      en: "Dynamic restaurant catalog showcasing dessert menu items with customer referral tracking and order queues.",
-      ar: "متجر وقائمة تفاعلية لعرض قوائم الحلويات بنظام إحالة للعملاء ولوحة إدارة للمخزون والطلبات.",
+      en: "Dynamic restaurant catalog showcasing dessert menu items with customer referral tracking, localized cart checkout, and kitchen order queues.",
+      ar: "متجر وقائمة تفاعلية لعرض قوائم الحلويات بنظام إحالة للعملاء، وسلة تسوق سريعة، ولوحة إدارة للطلبات الواردة.",
     },
-    metrics: { en: ["Interactive Cart", "Referral Engine"], ar: ["سلة طلبات تفاعلية", "نظام مكافآت وإحالة"] },
+    metrics: { en: ["Interactive Cart", "Referral Engine", "Sub-100ms UI Updates"], ar: ["سلة طلبات تفاعلية", "نظام مكافآت وإحالة", "استجابة واجهة فورية"] },
     stack: ["React.js", "Node.js", "MongoDB", "Tailwind CSS"],
     category: "MERN Stack",
     links: { github: "https://github.com/dev-ahmed-ragab/b-Labn" },
-    pinned: false,
+    githubNotice: {
+      en: "Public Open-Source Frontend & Backend Repository",
+      ar: "مشروع مفتوح المصدر على GitHub",
+    },
+    pinned: true,
     featuredYear: "2024",
-    highlights: { en: ["Referral tracking system"], ar: ["تتبع الإحالات والمبيعات"] },
+    highlights: { en: ["Referral tracking system", "State-managed cart checkout"], ar: ["تتبع الإحالات والمبيعات", "إدارة حالة متقدمة للسلة"] },
+    caseStudy: {
+      overview: {
+        en: "Fast e-commerce storefront for rapid food ordering with custom state caching and referral incentive system.",
+        ar: "واجهة متجر إلكتروني تفاعلية لطلبات الطعام مع نظام إحالة العملاء وسلة شراء سريعة.",
+      },
+      problem: {
+        en: "Food ordering clients needed an ultra-responsive menu that updates instantly without full page reloads, accompanied by viral customer sharing mechanics.",
+        ar: "احتاج العميل لقائمة طعام سريعة التجاوب لتسجيل طلبات الزبائن وتتبع مكافآت الإحالة بدون إعادة تحميل الصفحة.",
+      },
+      solution: {
+        en: "Engineered an optimistic UI cart with local storage persistence and referral coupon discount calculations in real-time.",
+        ar: "بناء سلة تسوق فورية التحديث مع حفظ المشتريات محلياً وحساب خصومات الإحالة وكوبونات الخصم لحظياً.",
+      },
+      architecture: {
+        en: [
+          "Optimistic UI updates providing instant visual feedback on cart operations.",
+          "Referral code validation and discount calculation microservice.",
+          "Mobile-first responsive menu navigation optimized for fast touch ordering.",
+        ],
+        ar: [
+          "تحديثات واجهة متفائلة (Optimistic UI) تعطي استجابة فورية عند تعديل السلة.",
+          "محرك فحص أكواد الإحالة واحتساب نسب الخصم والمكافآت.",
+          "تصميم موجه أولاً للهواتف لتمكين الطلب السريع باللمس في ثوانٍ معدودة.",
+        ],
+      },
+      mockupGradient: "bg-gradient-to-br from-space-900 via-space-950 to-nebula-violet/25",
+      mockupBadge: "E-Commerce & Food Ordering",
+    },
   },
   {
     id: "youtube-clone",
@@ -417,18 +449,50 @@ export const projects: Project[] = [
       en: "Skyscrapers Real Estate Portal",
       ar: "سكاي سكريبرز — بوابة العقارات والمشاريع",
     },
-    subtitle: { en: "Custom WordPress Architecture", ar: "تطوير ووردبريس مخصص" },
+    subtitle: { en: "Custom WordPress Architecture & Lead Engine", ar: "تطوير ووردبريس مخصص وقمع مبيعات" },
     description: {
-      en: "Bespoke property listing website with dynamic custom fields, lead capture forms, and mobile-optimized layouts.",
-      ar: "موقع استعراض مشاريع عقارية بتصميم مخصص بالكامل ونماذج استقبال طلبات العملاء وتجاوب ممتاز.",
+      en: "Bespoke property listing platform with dynamic custom fields, lead capture funnels, and optimized mobile loading speeds.",
+      ar: "موقع استعراض مشاريع عقارية بتصميم مخصص بالكامل ونماذج استقبال طلبات العملاء وتحميل سريع على كافة الشاشات.",
     },
-    metrics: { en: ["Optimized Asset Delivery", "Lead Funnel"], ar: ["تحميل سريع", "نماذج تواصل فورية"] },
-    stack: ["WordPress", "Elementor", "Custom Theme", "PHP"],
+    metrics: { en: ["Sub-second First Paint", "Custom Post Types", "Automated Lead Funnel"], ar: ["سرعة تحميل أولية فائقة", "هيكلة أنواع بيانات مخصصة", "تحويل وتجميع طلبات العملاء"] },
+    stack: ["WordPress", "PHP", "Custom Theme", "Elementor", "MySQL"],
     category: "WordPress",
     links: {},
-    pinned: false,
+    githubNotice: {
+      en: "Client Commercial Website (Production Real Estate Portal)",
+      ar: "موقع تجاري مخصص لشركة عقارية",
+    },
+    pinned: true,
     featuredYear: "2024",
-    highlights: { en: ["Custom post type architecture"], ar: ["هيكلة مخصصة لأنواع العقارات"] },
+    highlights: { en: ["Custom post type architecture", "Automated lead dispatch"], ar: ["هيكلة مخصصة لأنواع العقارات", "إرسال بيانات العملاء تلقائياً"] },
+    caseStudy: {
+      overview: {
+        en: "Tailored real estate portal designed for high lead conversion, advanced property filtering, and lightweight asset delivery.",
+        ar: "بوابة عقارية مخصصة لتحقيق أعلى معدل لتحويل الزوار إلى عملاء مع فلاتر ذكية للبحث عن الوحدات.",
+      },
+      problem: {
+        en: "Heavy off-the-shelf WordPress themes loaded dozens of redundant scripts, resulting in 5+ second load times and lost prospective buyers on mobile devices.",
+        ar: "القوالب التجارية الجاهزة كانت تُبطئ الموقع بأكواد وإضافات زائدة تسببت في بطء التصفح وفقدان المشترين المحتملين.",
+      },
+      solution: {
+        en: "Developed a lightweight bespoke theme using native WordPress hooks, custom taxonomies, and integrated WhatsApp & email lead capture directly into property detail pages.",
+        ar: "تطوير قالب مخصص خفيف الوزن باستخدام WordPress Hooks الأصلية، مع ربط إرسال استفسارات الوحدات مباشرة للواتساب والبريد.",
+      },
+      architecture: {
+        en: [
+          "Bespoke Custom Post Types (CPTs) and taxonomies for compound amenities filtering.",
+          "CSS/JS asset purging removing 70% of unused library code for ultra-fast mobile rendering.",
+          "Lead capture webhook triggers alerting the sales team within seconds of inquiry.",
+        ],
+        ar: [
+          "هيكلة بيانات مخصصة (Custom Post Types) لفلترة الوحدات السكنية والتجارية بسهولة.",
+          "تنظيف وتقليص ملفات CSS/JS بنسبة 70% للحصول على سرعة تصفح استثنائية على الهواتف.",
+          "ربط استقبال طلبات المعاينة فورياً لتنبيه فريق المبيعات فور إرسال الطلب.",
+        ],
+      },
+      mockupGradient: "bg-gradient-to-br from-space-900 via-space-950 to-nebula-emerald/25",
+      mockupBadge: "Custom WordPress Architecture",
+    },
   },
   {
     id: "travel-agency",

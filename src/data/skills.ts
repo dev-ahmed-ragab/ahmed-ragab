@@ -21,14 +21,14 @@ export interface SkillCategory {
 
 export const skillCategories: SkillCategory[] = [
   {
-    id: "frontend-architecture",
+    id: "frontend-web",
     title: {
-      en: "Frontend & Architecture",
-      ar: "واجهات المستخدم وهندسة المعمارية",
+      en: "Modern Frontend & Web Apps",
+      ar: "واجهات الويب وتطبيقات React",
     },
     description: {
-      en: "Building responsive, sub-second, accessible user interfaces with modern React paradigms.",
-      ar: "بناء واجهات مستخدم فائقة السرعة، متجاوبة، وسهلة الاستخدام بأحدث أنماط React.",
+      en: "Crafting fast, responsive, and intuitive web applications with modern React paradigms.",
+      ar: "بناء واجهات مستخدم تفاعلية وسريعة التجاوب باستخدام أحدث تقنيات React و Next.js.",
     },
     skills: [
       {
@@ -72,16 +72,16 @@ export const skillCategories: SkillCategory[] = [
   {
     id: "backend-data",
     title: {
-      en: "Backend & Cloud Services",
-      ar: "الأنظمة الخلفية وقواعد البيانات السحابية",
+      en: "Backend, APIs & Cloud Data",
+      ar: "الأنظمة الخلفية وقواعد البيانات",
     },
     description: {
-      en: "Scalable APIs, secure authentication, and real-time database management.",
-      ar: "واجهات برمجية قابلة للتوسع، أنظمة حماية مشفرة، وإدارة لحظية للبيانات.",
+      en: "Practical APIs, secure authentication, and real-time database management.",
+      ar: "واجهات برمجية عملية، أنظمة تسجيل مشفرة، وإدارة قواعد البيانات السحابية.",
     },
     skills: [
       {
-        name: "Supabase & Postgres",
+        name: "Supabase & PostgreSQL",
         iconSlug: "supabase",
         level: "Advanced",
         description: {
@@ -108,7 +108,7 @@ export const skillCategories: SkillCategory[] = [
         },
       },
       {
-        name: "Docker & Container Basics",
+        name: "Docker & Deployment Basics",
         iconSlug: "docker",
         level: "Intermediate",
         description: {
@@ -121,16 +121,25 @@ export const skillCategories: SkillCategory[] = [
   {
     id: "platforms-tools",
     title: {
-      en: "Desktop, PWA & Tooling",
-      ar: "الديسكتوب، تطبيقات PWA وأدوات التطوير",
+      en: "WordPress, Desktop & Tools",
+      ar: "ووردبريس، الديسكتوب وأدوات التطوير",
     },
     description: {
-      en: "Expanding web codebases into standalone native-feel desktop and cross-platform apps.",
-      ar: "توسيع تطبيقات الويب لتعمل كتطبيقات ديسكتوب وتطبيقات ويب تقدمية سريعة.",
+      en: "Custom WordPress CMS solutions, desktop packaging, and professional Git workflows.",
+      ar: "حلول ووردبريس مخصصة للعملاء، تطبيقات ديسكتوب، وإدارة احترافية للمستودعات.",
     },
     skills: [
       {
-        name: "Electron",
+        name: "WordPress / Custom Themes & CPTs",
+        iconSlug: "wordpress",
+        level: "Advanced",
+        description: {
+          en: "Custom PHP theme architecture, Custom Post Types, lead funnels, and WooCommerce.",
+          ar: "برمجة القوالب المخصصة بـ PHP، أنواع بيانات مخصصة (CPTs)، وقنوات استقبال العملاء.",
+        },
+      },
+      {
+        name: "Electron Desktop Apps",
         iconSlug: "electron",
         level: "Advanced",
         description: {
@@ -148,21 +157,12 @@ export const skillCategories: SkillCategory[] = [
         },
       },
       {
-        name: "Git & CI/CD",
+        name: "Git & CI/CD Workflows",
         iconSlug: "git",
         level: "Advanced",
         description: {
           en: "Git branch workflows, PR reviews, Vercel automated deployments, and release hygiene.",
           ar: "إدارة الفروع، مراجعات الأكواد (PRs)، والنشر الآلي المستمر عبر Vercel.",
-        },
-      },
-      {
-        name: "WordPress / Custom Themes",
-        iconSlug: "wordpress",
-        level: "Advanced",
-        description: {
-          en: "Custom PHP theme architecture, WooCommerce, Elementor pro hooks, and security.",
-          ar: "برمجة القوالب المخصصة بـ PHP، متاجر WooCommerce، وحماية المواقع.",
         },
       },
     ],
