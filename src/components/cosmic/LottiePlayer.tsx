@@ -1,7 +1,18 @@
 "use client";
 
 import React, { useEffect, useState, useMemo, type CSSProperties, type Ref } from "react";
-import { Lottie, type LottieHandle } from "lottie-react";
+import dynamic from "next/dynamic";
+import type { LottieHandle } from "lottie-react";
+
+// Dynamically import Lottie with ssr: false so that lottie-web is NEVER
+// required by the Node.js server runtime during SSR or SSG.
+const DynamicLottie = dynamic(
+  () => import("lottie-react").then((mod) => mod.Lottie),
+  {
+    ssr: false,
+    loading: () => null,
+  }
+);
 
 export interface LottiePlayerProps {
   /**
@@ -62,7 +73,7 @@ export function LottiePlayer({
   }
 
   return (
-    <Lottie
+    <DynamicLottie
       src={animationSource}
       loop={loop}
       autoplay={autoplay}

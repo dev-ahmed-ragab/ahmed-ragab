@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -25,6 +25,11 @@ export function SkillsSection() {
   const [hoveredSkill, setHoveredSkill] = useState<SkillItem | null>(null);
   const [nodePos, setNodePos] = useState<NodeScreenPos | null>(null);
   const [autoSpin, setAutoSpin] = useState<boolean>(true);
+
+  const handleSelectSkill = useCallback((skill: SkillItem | null, pos?: NodeScreenPos | null) => {
+    setHoveredSkill(skill);
+    setNodePos(pos || null);
+  }, []);
 
   // Category filter tabs
   const categoryTabs: { id: SkillCategory | "all"; label: string; icon: typeof Layout }[] = [
@@ -75,8 +80,8 @@ export function SkillsSection() {
         </div>
 
         {/* Sleek Floating Filter Navigation Dock */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mb-4 z-20">
-          <div className="inline-flex flex-wrap items-center gap-1.5 p-1 rounded-full bg-white/[0.04] border border-white/10 backdrop-blur-xl shadow-lg">
+        <div className="flex flex-wrap items-center justify-center gap-2 mb-4 z-20 w-full">
+          <div className="inline-flex flex-wrap items-center justify-center gap-1.5 p-1.5 sm:p-1 rounded-2xl sm:rounded-full bg-white/[0.04] border border-white/10 backdrop-blur-xl shadow-lg max-w-full">
             {categoryTabs.map((tab) => {
               const Icon = tab.icon;
               const isActive = activeCategory === tab.id;
@@ -125,10 +130,7 @@ export function SkillsSection() {
           <GalaxySkillCloud
             skills={SKILL_ITEMS}
             activeCategory={activeCategory}
-            onSelectSkill={(skill, pos) => {
-              setHoveredSkill(skill);
-              setNodePos(pos || null);
-            }}
+            onSelectSkill={handleSelectSkill}
             showMesh={true}
             autoSpin={autoSpin}
           />

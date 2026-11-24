@@ -88,8 +88,8 @@ export function GalaxySkillCloud({
   const containerRef = useRef<HTMLDivElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
-  const propsRef = useRef({ activeCategory, highlightedSkillId, showMesh, autoSpin });
-  propsRef.current = { activeCategory, highlightedSkillId, showMesh, autoSpin };
+  const propsRef = useRef({ activeCategory, highlightedSkillId, showMesh, autoSpin, onSelectSkill });
+  propsRef.current = { activeCategory, highlightedSkillId, showMesh, autoSpin, onSelectSkill };
 
   useEffect(() => {
     const container = containerRef.current;
@@ -262,10 +262,13 @@ export function GalaxySkillCloud({
       const sinY = Math.sin(rotY);
       const cosX = Math.cos(rotX);
       const sinX = Math.sin(rotX);
-      const radius = Math.min(width, height) * 0.38;
+      const isCompact = width < 520;
+      const radius = Math.min(width, height) * (isCompact ? 0.36 : 0.38);
       const fov = radius * 2.8;
       const cx = width / 2;
       const cy = height / 2;
+      const minIcon = isCompact ? 24 : 34;
+      const iconRange = isCompact ? 12 : 16;
 
       for (const n of nodes) {
         const x1 = n.x0 * cosY - n.z0 * sinY;
@@ -277,7 +280,7 @@ export function GalaxySkillCloud({
         n.sx = cx + x1 * radius * persp;
         n.sy = cy + y2 * radius * persp;
         n.sz = z2;
-        n.iconSize = 34 + ((z2 + 1) / 2) * 16;
+        n.iconSize = minIcon + ((z2 + 1) / 2) * iconRange;
       }
 
       // Constellation lines: Pure, elegant, monochromatic starlight (NO colored triangles!)
@@ -425,11 +428,12 @@ export function GalaxySkillCloud({
         }
 
         // Skill name pill underneath icon
-        const fontSize = Math.max(11, Math.round(11 + depth * 1.5));
+        const baseFont = width < 520 ? 9.5 : 11;
+        const fontSize = Math.max(9, Math.round(baseFont + depth * 1.5));
         ctx.font = `${isHover || isConnected ? 600 : 500} ${fontSize}px ${theme.fontFamily}`;
         const tw = ctx.measureText(n.name).width;
-        const padX = isHover ? 9 : 7;
-        const pillH = isHover ? 22 : 20;
+        const padX = isHover ? 9 : width < 520 ? 5 : 7;
+        const pillH = isHover ? 22 : width < 520 ? 17 : 20;
         const pillX = n.sx - tw / 2 - padX;
         const pillY = n.sy + sz * 0.54 + 4;
 
@@ -474,8 +478,47 @@ export function GalaxySkillCloud({
     io.observe(container);
 
     // Pointer events: Drag spins freely; moving cursor does NOT steer or reverse rotation!
+    let downX = 0;
+    let downY = 0;
+
+    const findHitNode = (mx: number, my: number, maxDist: number) => {
+      let best = -1;
+      let bestZ = -Infinity;
+      let bestDist = maxDist;
+      for (let i = 0; i < nodes.length; i++) {
+        if (nodes[i].sz <= -0.35) continue;
+        const d = Math.hypot(nodes[i].sx - mx, nodes[i].sy - my);
+        // Prefer front-most node when multiple nodes overlap within hit radius
+        if (d < bestDist || (d < maxDist && nodes[i].sz > bestZ + 0.15 && d < maxDist * 0.9)) {
+          if (nodes[i].sz >= bestZ - 0.15 || d < bestDist * 0.65) {
+            bestDist = d;
+            bestZ = nodes[i].sz;
+            best = i;
+          }
+        }
+      }
+      return best;
+    };
+
+    const emitSelection = (idx: number) => {
+      if (idx !== -1) {
+        const nextSkill = skills[idx];
+        const node = nodes[idx];
+        propsRef.current.onSelectSkill?.(nextSkill, {
+          x: node.sx,
+          y: node.sy,
+          containerWidth: width,
+          containerHeight: height,
+        });
+      } else {
+        propsRef.current.onSelectSkill?.(null, null);
+      }
+    };
+
     const onPointerDown = (e: PointerEvent) => {
       dragging = true;
+      downX = e.clientX;
+      downY = e.clientY;
       lastX = e.clientX;
       lastY = e.clientY;
       container.setPointerCapture(e.pointerId);
@@ -494,6 +537,8 @@ export function GalaxySkillCloud({
         return;
       }
 
+      if (e.pointerType === "touch") return;
+
       const rect = canvas.getBoundingClientRect();
       const mx = e.clientX - rect.left;
       const my = e.clientY - rect.top;
@@ -510,41 +555,36 @@ export function GalaxySkillCloud({
       }
 
       if (best === -1) {
-        let bestDist = 30;
-        for (let i = 0; i < nodes.length; i++) {
-          const d = Math.hypot(nodes[i].sx - mx, nodes[i].sy - my);
-          if (d < bestDist && nodes[i].sz > -0.35) {
-            bestDist = d;
-            best = i;
-          }
-        }
+        best = findHitNode(mx, my, 32);
       }
 
       if (best !== hoveredIdx) {
         hoveredIdx = best;
-        if (best !== -1) {
-          const nextSkill = skills[best];
-          const node = nodes[best];
-          onSelectSkill?.(nextSkill, {
-            x: node.sx,
-            y: node.sy,
-            containerWidth: width,
-            containerHeight: height,
-          });
-        } else {
-          onSelectSkill?.(null, null);
-        }
+        emitSelection(best);
       }
     };
 
-    const onPointerUp = () => {
+    const onPointerUp = (e: PointerEvent) => {
+      const moved = Math.hypot(e.clientX - downX, e.clientY - downY);
       dragging = false;
+
+      // Touch tap support: tap a node to toggle its details card
+      if (moved < 8 && e.pointerType !== "mouse") {
+        const rect = canvas.getBoundingClientRect();
+        const mx = e.clientX - rect.left;
+        const my = e.clientY - rect.top;
+        const tapped = findHitNode(mx, my, 36);
+        hoveredIdx = tapped === hoveredIdx ? -1 : tapped;
+        emitSelection(hoveredIdx);
+      }
     };
 
-    const onPointerLeave = () => {
+    const onPointerLeave = (e: PointerEvent) => {
       dragging = false;
-      hoveredIdx = -1;
-      onSelectSkill?.(null, null);
+      if (e.pointerType === "mouse") {
+        hoveredIdx = -1;
+        emitSelection(-1);
+      }
     };
 
     container.addEventListener("pointerdown", onPointerDown);
@@ -564,12 +604,12 @@ export function GalaxySkillCloud({
       container.removeEventListener("pointerup", onPointerUp);
       container.removeEventListener("pointerleave", onPointerLeave);
     };
-  }, [skills, onSelectSkill]);
+  }, [skills]);
 
   return (
     <div
       ref={containerRef}
-      className={`relative w-full h-[520px] sm:h-[600px] lg:h-[680px] cursor-grab touch-none overflow-visible active:cursor-grabbing select-none ${className}`}
+      className={`relative w-full h-[410px] sm:h-[580px] lg:h-[660px] cursor-grab touch-pan-y sm:touch-none overflow-visible active:cursor-grabbing select-none ${className}`}
       aria-label="Interactive galaxy skill cloud"
     >
       <canvas ref={canvasRef} className="block w-full h-full" />

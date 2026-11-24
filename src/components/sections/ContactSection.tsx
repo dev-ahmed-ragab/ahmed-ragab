@@ -131,53 +131,38 @@ export function ContactSection() {
   return (
     <section
       id="contact"
-      className="relative py-28 sm:py-36 px-4 sm:px-6 lg:px-8 w-full z-10 overflow-hidden"
+      className="relative py-14 sm:py-28 px-4 sm:px-6 lg:px-8 w-full z-10 overflow-hidden"
     >
       {/* Subtle Ambient Nebula Glows */}
-      <div className="absolute top-1/2 start-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cyan-500/5 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-10 end-10 w-[420px] h-[420px] bg-violet-600/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/2 start-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] sm:w-[600px] h-[320px] sm:h-[600px] bg-cyan-500/5 rounded-full blur-[100px] sm:blur-[140px] pointer-events-none" />
+      <div className="absolute bottom-10 end-10 w-[260px] sm:w-[420px] h-[260px] sm:h-[420px] bg-violet-600/5 rounded-full blur-[90px] sm:blur-[120px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto relative z-10 w-full space-y-14 sm:space-y-18">
+      <div className="max-w-7xl mx-auto relative z-10 w-full space-y-10 sm:space-y-16">
         {/* ================================================================= */}
         {/* SECTION HEADER: MONUMENTAL EDITORIAL TYPOGRAPHY                   */}
         {/* ================================================================= */}
-        <div className="flex flex-col items-start space-y-4 max-w-3xl">
-          {/* Live Global Status Instrument */}
-          <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-emerald-500/30 bg-emerald-950/40 backdrop-blur-md text-xs font-mono font-semibold text-emerald-300 shadow-sm">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
-            </span>
-            <span>
-              {isAr
-                ? "متاح للتعاقدات وعروض العمل الدولية عن بُعد"
-                : "Available for Global Remote Contracts & Full-Time Roles"}
-            </span>
-          </div>
-
+        <div className="flex flex-col items-start space-y-3 max-w-3xl">
           {/* Headline */}
           <h2 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.14]">
-            {isAr
-              ? "جاهز للمرحلة القادمة؟ لنبتكر شيئاً استثنائياً معاً."
-              : "Ready for the Next Orbit? Let's Build Something Exceptional."}
+            {isAr ? "لنبدأ العمل معاً." : "Let's Build Something Great."}
           </h2>
 
           {/* Subtitle */}
           <p className="text-sm sm:text-base lg:text-lg text-slate-300 max-w-2xl leading-relaxed font-normal">
             {isAr
-              ? "سواء كنت تبحث عن مهندس منتجات لقيادة مشروعك، أو تريد استشارة معمارية متقدمة، أو فرصة عمل متكاملة — قنوات الاتصال مفتوحة ومباشرة."
-              : "Whether you are looking for a product engineer to lead an MVP, architect a high-throughput system, or discuss a remote role — direct channels are open."}
+              ? "متاح للعمل عن بُعد، وتطوير المنتجات، والاستشارات التقنية."
+              : "Open to remote roles, startup MVPs, and technical consulting."}
           </p>
         </div>
 
         {/* ================================================================= */}
         {/* 2-COLUMN ARCHITECTURAL MASTER PANELS (Deep Obsidian Luxury)       */}
         {/* ================================================================= */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10 items-start w-full">
           {/* =============================================================== */}
           {/* LEFT PANEL (5 cols): DIRECT CHANNELS & TELEMETRY HUB            */}
           {/* =============================================================== */}
-          <div className="lg:col-span-5 flex flex-col space-y-5">
+          <div className="lg:col-span-5 flex flex-col space-y-5 min-w-0 w-full">
             {/* Primary Direct Email Master Card */}
             <div
               style={{
@@ -185,21 +170,21 @@ export function ContactSection() {
                 boxShadow:
                   "0 20px 50px -10px rgba(0, 0, 0, 0.75), 0 1px 1px rgba(255, 255, 255, 0.05) inset",
               }}
-              className="rounded-[24px] sm:rounded-[28px] border border-white/10 hover:border-cyan-500/35 p-6 sm:p-7 space-y-3 relative overflow-hidden transition-colors group"
+              className="rounded-[24px] sm:rounded-[28px] border border-white/10 hover:border-cyan-500/35 p-5 sm:p-7 space-y-3 relative overflow-hidden transition-colors group w-full"
             >
               {/* Top Hairline Sheen */}
               <div className="absolute top-0 inset-x-8 h-[1px] bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent pointer-events-none" />
 
               <div className="flex items-center justify-between gap-3">
-                <span className="text-xs font-mono font-semibold text-cyan-300 uppercase tracking-wider flex items-center gap-2">
-                  <Mail className="w-4 h-4 text-cyan-400" />
-                  <span>{isAr ? "البريد الإلكتروني المباشر" : "Direct Email Transmission"}</span>
+                <span className={`text-xs ${isAr ? "font-sans" : "font-mono uppercase tracking-wider"} font-semibold text-cyan-300 flex items-center gap-2`}>
+                  <Mail className="w-4 h-4 text-cyan-400 shrink-0" />
+                  <span>{isAr ? "البريد الإلكتروني المباشر" : "Direct Email"}</span>
                 </span>
 
                 <button
                   type="button"
                   onClick={handleCopyEmail}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono bg-white/[0.04] hover:bg-white/[0.08] text-slate-300 hover:text-white border border-white/10 transition-colors cursor-pointer"
+                  className={`inline-flex items-center gap-1.5 min-h-[40px] px-3.5 py-2 rounded-lg text-xs ${isAr ? "font-sans" : "font-mono"} bg-white/[0.04] hover:bg-white/[0.08] text-slate-300 hover:text-white border border-white/10 transition-colors cursor-pointer shrink-0`}
                   title="Copy email address"
                 >
                   {copiedEmail ? (
@@ -337,15 +322,15 @@ export function ContactSection() {
               style={{
                 backgroundColor: "#080d19",
               }}
-              className="rounded-[20px] border border-white/10 p-5 space-y-2 text-xs font-mono text-slate-400"
+              className="rounded-[20px] border border-white/10 p-5 space-y-2 text-xs font-mono text-slate-400 w-full"
             >
-              <div className="flex items-center gap-2 text-slate-300">
-                <MapPin className="w-4 h-4 text-cyan-400 shrink-0" />
-                <span>Cairo / Menoufia, Egypt • Available Worldwide (100% Remote)</span>
+              <div className="flex items-start gap-2 text-slate-300 min-w-0">
+                <MapPin className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
+                <span className="break-words min-w-0">Cairo / Menoufia, Egypt • Available Worldwide (100% Remote)</span>
               </div>
-              <div className="flex items-center gap-2 text-slate-400">
-                <Clock className="w-4 h-4 text-violet-400 shrink-0" />
-                <span>UTC+2 • Seamless overlap with US, EU, and GCC business hours</span>
+              <div className="flex items-start gap-2 text-slate-400 min-w-0">
+                <Clock className="w-4 h-4 text-violet-400 shrink-0 mt-0.5" />
+                <span className="break-words min-w-0">UTC+2 • Seamless overlap with US, EU, and GCC business hours</span>
               </div>
             </div>
           </div>
@@ -353,14 +338,14 @@ export function ContactSection() {
           {/* =============================================================== */}
           {/* RIGHT PANEL (7 cols): ARCHITECTURAL TRANSMISSION TERMINAL (FORM) */}
           {/* =============================================================== */}
-          <div className="lg:col-span-7">
+          <div className="lg:col-span-7 min-w-0 w-full">
             <div
               style={{
                 backgroundColor: "#080d19",
                 boxShadow:
                   "0 20px 50px -10px rgba(0, 0, 0, 0.75), 0 1px 1px rgba(255, 255, 255, 0.05) inset",
               }}
-              className="rounded-[28px] sm:rounded-[32px] border border-white/10 hover:border-cyan-500/30 p-6 sm:p-10 space-y-6 relative overflow-hidden transition-colors"
+              className="rounded-[28px] sm:rounded-[32px] border border-white/10 hover:border-cyan-500/30 p-5 sm:p-10 space-y-6 relative overflow-hidden transition-colors w-full"
             >
               {/* Top Hairline Sheen */}
               <div className="absolute top-0 inset-x-8 h-[1px] bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent pointer-events-none" />
@@ -368,19 +353,19 @@ export function ContactSection() {
               {/* Terminal Title */}
               <div className="space-y-1">
                 <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight flex items-center gap-2.5">
-                  <Sparkles className="w-5 h-5 text-cyan-400" />
-                  <span>{isAr ? "إرسال رسالة مباشرة" : "Dispatch Direct Transmission"}</span>
+                  <Sparkles className="w-5 h-5 text-cyan-400 shrink-0" />
+                  <span>{isAr ? "إرسال رسالة مباشرة" : "Send a Direct Message"}</span>
                 </h3>
                 <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
                   {isAr
-                    ? "اختر تصنيف الرسالة واكتب متطلبات مشروعك وسأقوم بالرد عليك خلال 24 ساعة."
-                    : "Select an inquiry preset and share your project requirements. I reply within 24 hours."}
+                    ? "اختر الموضوع واكتب تفاصيلك، وسأرد عليك خلال 24 ساعة."
+                    : "Pick a topic and share your details. I reply within 24 hours."}
                 </p>
               </div>
 
               {/* Preset Topic Selector */}
               <div className="space-y-2">
-                <span className="text-[11px] font-mono font-semibold text-slate-400 uppercase tracking-wider block">
+                <span className={`text-xs ${isAr ? "font-sans" : "font-mono uppercase tracking-wider"} font-semibold text-slate-400 block`}>
                   {isAr ? "موضوع الاستفسار السريع:" : "Inquiry Preset Topic:"}
                 </span>
                 <div className="flex flex-wrap gap-2">
@@ -391,7 +376,7 @@ export function ContactSection() {
                         key={preset.id}
                         type="button"
                         onClick={() => handleSelectTopic(preset)}
-                        className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all duration-200 border cursor-pointer ${
+                        className={`min-h-[40px] px-3.5 py-2 rounded-xl text-xs font-semibold transition-all duration-200 border cursor-pointer ${
                           isSelected
                             ? "bg-cyan-500/20 border-cyan-400/60 text-cyan-200 shadow-sm shadow-cyan-500/20"
                             : "bg-white/[0.03] hover:bg-white/[0.07] border-white/10 text-slate-300 hover:text-white"
@@ -409,7 +394,7 @@ export function ContactSection() {
                 {/* Name & Email (2 columns) */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
-                    <label className="text-xs font-mono font-semibold text-slate-300 flex items-center gap-1">
+                    <label className={`text-xs ${isAr ? "font-sans" : "font-mono"} font-semibold text-slate-300 flex items-center gap-1`}>
                       <span>{isAr ? "الاسم الكريم" : "Your Name"}</span>
                       <span className="text-cyan-400">*</span>
                     </label>
@@ -426,7 +411,7 @@ export function ContactSection() {
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="text-xs font-mono font-semibold text-slate-300 flex items-center gap-1">
+                    <label className={`text-xs ${isAr ? "font-sans" : "font-mono"} font-semibold text-slate-300 flex items-center gap-1`}>
                       <span>{isAr ? "البريد الإلكتروني" : "Your Email"}</span>
                       <span className="text-cyan-400">*</span>
                     </label>
@@ -445,7 +430,7 @@ export function ContactSection() {
 
                 {/* Subject Field */}
                 <div className="space-y-1.5">
-                  <label className="text-xs font-mono font-semibold text-slate-300">
+                  <label className={`text-xs ${isAr ? "font-sans" : "font-mono"} font-semibold text-slate-300 block`}>
                     {isAr ? "عنوان الموضوع" : "Subject"}
                   </label>
                   <input
@@ -465,7 +450,7 @@ export function ContactSection() {
 
                 {/* Message Field */}
                 <div className="space-y-1.5">
-                  <label className="text-xs font-mono font-semibold text-slate-300 flex items-center gap-1">
+                  <label className={`text-xs ${isAr ? "font-sans" : "font-mono"} font-semibold text-slate-300 flex items-center gap-1`}>
                     <span>{isAr ? "تفاصيل المشروع أو الدور الوظيفي" : "Project Details or Role Scope"}</span>
                     <span className="text-cyan-400">*</span>
                   </label>
@@ -517,12 +502,12 @@ export function ContactSection() {
                   {status === "submitting" ? (
                     <>
                       <span className="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full" />
-                      <span>{isAr ? "جارٍ إرسال الرسالة..." : "Transmitting Signal..."}</span>
+                      <span>{isAr ? "جارٍ إرسال الرسالة..." : "Sending Message..."}</span>
                     </>
                   ) : (
                     <>
                       <Send className="w-4 h-4 text-cyan-200" />
-                      <span>{isAr ? "إرسال الرسالة الآن" : "Transmit Message Now"}</span>
+                      <span>{isAr ? "إرسال الرسالة الآن" : "Send Message"}</span>
                     </>
                   )}
                 </button>

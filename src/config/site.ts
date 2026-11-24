@@ -1,8 +1,8 @@
 export const siteConfig = {
   name: "Ahmed Ragab",
   fullName: {
-    en: "Ahmed Ragab Abdelkareem",
-    ar: "أحمد رجب عبد الكريم",
+    en: "Ahmed Ragab",
+    ar: "أحمد رجب",
   },
   role: {
     en: "Full-Stack Product Engineer & Technical Founder",

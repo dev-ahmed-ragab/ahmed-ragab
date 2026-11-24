@@ -351,22 +351,22 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 3.5rem;
-  padding-bottom: 12rem;
+  gap: 2rem;
+  padding-bottom: 4.5rem;
 }
 
 .cosmic-story {
   position: -webkit-sticky;
   position: sticky;
-  top: calc(4.75rem + var(--i, 0) * 22px);
+  top: calc(4rem + var(--i, 0) * 14px);
   z-index: calc(10 + var(--i, 0));
-  min-height: 400px;
+  min-height: 0;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 1024px) {
   .cosmic-stack {
     gap: 5.5rem;
-    padding-bottom: 16rem;
+    padding-bottom: 10rem;
   }
   .cosmic-story {
     top: calc(5.25rem + var(--i, 0) * 28px);

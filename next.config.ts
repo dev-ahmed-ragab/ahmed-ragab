@@ -9,6 +9,13 @@ const nextConfig: NextConfig = {
     unoptimized: true,
   },
   serverExternalPackages: ["@vercel/analytics", "@vercel/speed-insights"],
+  transpilePackages: [
+    "framer-motion",
+    "motion-dom",
+    "motion-utils",
+    "lottie-react",
+    "lottie-web",
+  ],
 };
 
 export default withNextIntl(nextConfig);

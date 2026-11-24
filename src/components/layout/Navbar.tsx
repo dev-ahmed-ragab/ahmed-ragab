@@ -30,12 +30,22 @@ export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const isArabic = locale === "ar";
+  const isHomePage = pathname === "/" || pathname === "/ar" || pathname === "/en";
 
   useEffect(() => {
+    let ticking = false;
+
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setScrolled(window.scrollY > 15);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
-    window.addEventListener("scroll", handleScroll);
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -94,36 +104,65 @@ export function Navbar() {
       href: "#contact",
       label: t("contact"),
       icon: Radio,
-      description: isArabic ? "إشارة الاتصال المباشر" : "Direct subspace transmission",
+      description: isArabic ? "تواصل مباشر وبدء العمل" : "Direct inquiries & contact",
     },
   ];
 
+  const getNavHref = (hash: string) => {
+    return isHomePage ? hash : `/${locale}${hash}`;
+  };
+
   const handleNavClick = (href: string) => {
     setMobileMenuOpen(false);
-    const target = document.querySelector(href);
-    if (target) {
-      target.scrollIntoView({ behavior: "smooth" });
+    if (isHomePage) {
+      const target = document.querySelector(href);
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth" });
+        return;
+      }
     }
+    router.push(`/${href}` as any);
   };
 
   return (
     <>
       <header
-        className={`fixed top-0 start-0 end-0 z-40 transition-all duration-300 ${
+        className={`fixed top-0 start-0 end-0 z-50 h-14 sm:h-16 flex items-center transition-all duration-300 ${
           scrolled
-            ? "bg-space-950/85 backdrop-blur-md border-b border-white/10 shadow-lg shadow-black/40 py-3"
-            : "bg-transparent py-4 sm:py-5"
+            ? "bg-space-950/95 backdrop-blur-xl border-b border-white/10 shadow-lg shadow-black/50"
+            : "bg-space-950/75 sm:bg-space-950/40 backdrop-blur-md border-b border-white/5"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+          <div className="relative flex items-center justify-between">
             {/* Logo / Brand */}
             <Link
               href="/"
               className="flex items-center gap-2.5 sm:gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-nebula-violet rounded-lg min-w-0"
             >
-              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-nebula-indigo to-nebula-violet flex items-center justify-center font-bold text-white shadow-lg shadow-nebula-indigo/30 group-hover:scale-105 transition-transform shrink-0 text-sm sm:text-base">
-                AR
+              <div className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center group-hover:scale-105 transition-transform shrink-0">
+                <svg
+                  viewBox="0 0 100 100"
+                  className="w-full h-full drop-shadow-[0_0_12px_rgba(0,240,255,0.45)]"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <defs>
+                    <linearGradient id="nav-ar-grad" x1="0%" y1="100%" x2="100%" y2="0%">
+                      <stop offset="0%" stopColor="#00F0FF" />
+                      <stop offset="45%" stopColor="#38BDF8" />
+                      <stop offset="100%" stopColor="#818CF8" />
+                    </linearGradient>
+                    <linearGradient id="nav-thrust-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="#FFFFFF" />
+                      <stop offset="100%" stopColor="#38BDF8" />
+                    </linearGradient>
+                  </defs>
+                  <path d="M 12 86 L 39 14 L 54 14 L 27 86 Z" fill="url(#nav-ar-grad)" />
+                  <path d="M 46 14 L 75 14 C 89 14 98 23 98 37 C 98 50 89 59 75 59 L 55 59 L 50 45 L 73 45 C 80 45 84 41 84 37 C 84 32 80 28 73 28 L 51 28 Z" fill="url(#nav-ar-grad)" />
+                  <polygon points="25,64 59,64 55,50 21,50" fill="url(#nav-thrust-grad)" />
+                  <polygon points="57,55 72,55 93,86 78,86" fill="url(#nav-ar-grad)" />
+                </svg>
               </div>
               <div className="flex flex-col min-w-0">
                 <span className="text-sm sm:text-base font-bold tracking-tight text-white group-hover:text-nebula-cyan transition-colors truncate">
@@ -136,12 +175,18 @@ export function Navbar() {
               </div>
             </Link>
 
-            {/* Desktop Navigation Links */}
-            <nav className="hidden md:flex items-center gap-1 rounded-full border border-white/10 bg-space-900/60 backdrop-blur-md px-4 py-1.5 shadow-inner">
+            {/* Desktop Navigation Links (Cleanly Centered at Desktop Viewports) */}
+            <nav className="hidden lg:flex items-center gap-1 rounded-full border border-white/10 bg-space-900/60 backdrop-blur-md px-4 py-1.5 shadow-inner lg:absolute lg:left-1/2 lg:-translate-x-1/2">
               {navLinks.map((link) => (
                 <a
                   key={link.href}
-                  href={link.href}
+                  href={getNavHref(link.href)}
+                  onClick={(e) => {
+                    if (isHomePage) {
+                      e.preventDefault();
+                      handleNavClick(link.href);
+                    }
+                  }}
                   className="px-3.5 py-1.5 text-xs font-medium text-slate-300 hover:text-white hover:bg-white/5 rounded-full transition-all"
                 >
                   {link.label}
@@ -149,65 +194,50 @@ export function Navbar() {
               ))}
             </nav>
 
-            {/* Right Action Buttons (Desktop) */}
-            <div className="hidden md:flex items-center gap-2.5">
-              {/* Cosmic Theme 1-Click Cycler */}
+            {/* Right Action Controls (Desktop lg+: Compact & Perfectly Balanced) */}
+            <div className="hidden lg:flex items-center gap-2">
+              {/* Compact Cosmic Theme Palette Swatches */}
               <ThemeToggle variant="cycler" />
 
-              {/* 1-Click Language Switcher Capsule */}
+              {/* 1-Click Compact Language Switcher */}
               <motion.button
                 type="button"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.94 }}
                 onClick={toggleLocale}
-                className="min-h-[40px] px-3.5 py-2 text-xs font-semibold rounded-xl border border-white/10 bg-white/[0.04] hover:bg-white/[0.08] hover:border-cyan-400/35 text-slate-200 flex items-center gap-2 transition-all shadow-sm backdrop-blur-md cursor-pointer select-none group focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+                className="h-8 px-3 text-xs font-semibold rounded-full border border-white/15 bg-space-950/70 hover:border-cyan-400/40 text-slate-200 flex items-center gap-1.5 transition-all shadow-sm backdrop-blur-md cursor-pointer select-none group focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
                 title={isArabic ? "التبديل إلى الإنجليزية" : "Switch to Arabic"}
                 aria-label={isArabic ? "التبديل إلى الإنجليزية" : "Switch to Arabic"}
               >
                 <Globe className="w-3.5 h-3.5 text-cyan-400 group-hover:rotate-45 transition-transform duration-300 shrink-0" />
-                <span className="font-mono font-bold tracking-wide text-white">
+                <span className="font-mono font-bold tracking-wide text-white text-[11px]">
                   {locale === "en" ? "العربية" : "English"}
                 </span>
-                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400/80 group-hover:bg-cyan-300 animate-pulse shrink-0" />
               </motion.button>
-
-              {/* CV Download CTA */}
-              <Button
-                asChild
-                variant="cosmicPrimary"
-                size="sm"
-                className="min-h-[40px] px-4 py-2 text-xs font-bold rounded-xl"
-              >
-                <a
-                  href={siteConfig.links.cv}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Download className="w-3.5 h-3.5" />
-                  <span>{t("resume")}</span>
-                </a>
-              </Button>
             </div>
 
-            {/* Mobile Action Controls (Touch Friendly >= 44px) */}
-            <div className="flex md:hidden items-center gap-2 shrink-0">
-              {/* Quick Language Switcher Button (44px min touch target) */}
+            {/* Mobile & Tablet Action Controls (< lg: Touch Friendly >= 42px) */}
+            <div className="flex lg:hidden items-center gap-1.5 sm:gap-2 shrink-0">
+              {/* Compact Theme Cycler for Tablet & Mobile */}
+              <ThemeToggle variant="cycler" />
+
+              {/* Quick Language Switcher Button */}
               <button
                 onClick={toggleLocale}
-                className="min-w-[44px] min-h-[44px] px-3 flex items-center justify-center gap-1.5 text-slate-200 border border-white/10 rounded-xl bg-white/5 hover:bg-white/10 hover:border-nebula-cyan/40 active:scale-95 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-nebula-cyan"
+                className="min-w-[42px] sm:min-w-[44px] min-h-[42px] sm:min-h-[44px] px-2.5 sm:px-3 flex items-center justify-center gap-1 text-slate-200 border border-white/10 rounded-xl bg-white/5 hover:bg-white/10 hover:border-nebula-cyan/40 active:scale-95 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-nebula-cyan"
                 aria-label={isArabic ? "Switch to English" : "التبديل إلى العربية"}
               >
-                <Globe className="w-4 h-4 text-nebula-cyan shrink-0" />
-                <span className="text-xs font-mono font-bold">
+                <Globe className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-nebula-cyan shrink-0" />
+                <span className="text-[11px] sm:text-xs font-mono font-bold">
                   {locale === "en" ? "AR" : "EN"}
                 </span>
               </button>
 
-              {/* Mobile Drawer Trigger (44px min touch target) */}
+              {/* Mobile/Tablet Drawer Trigger */}
               <button
                 onClick={() => setMobileMenuOpen(true)}
-                className="min-w-[44px] min-h-[44px] flex items-center justify-center text-slate-200 border border-white/10 rounded-xl bg-white/5 hover:bg-white/10 hover:border-nebula-cyan/40 active:scale-95 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-nebula-cyan"
-                aria-label="Open mobile navigation menu"
+                className="min-w-[42px] sm:min-w-[44px] min-h-[42px] sm:min-h-[44px] flex items-center justify-center text-slate-200 border border-white/10 rounded-xl bg-white/5 hover:bg-white/10 hover:border-nebula-cyan/40 active:scale-95 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-nebula-cyan"
+                aria-label="Open navigation menu"
                 aria-expanded={mobileMenuOpen}
               >
                 <Menu className="w-5 h-5 text-slate-200" />
@@ -217,10 +247,10 @@ export function Navbar() {
         </div>
       </header>
 
-      {/* Modern Cosmic Mobile Navigation Drawer / Sheet */}
+      {/* Modern Cosmic Navigation Drawer / Sheet (< lg) */}
       <AnimatePresence>
         {mobileMenuOpen && (
-          <div className="fixed inset-0 z-50 md:hidden flex justify-end">
+          <div className="fixed inset-0 z-[100] lg:hidden flex justify-end">
             {/* Backdrop Overlay */}
             <motion.div
               initial={{ opacity: 0 }}

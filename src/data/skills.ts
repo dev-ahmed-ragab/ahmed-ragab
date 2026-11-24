@@ -34,15 +34,15 @@ export const SKILL_ITEMS: SkillItem[] = [
     category: "frontend",
     color: "#ffffff",
     iconSrc: SKILL_ICON_DATA["nextjs"] || "/icons/skills/nextjs.svg",
-    score: "⭐ 9.9 / 10",
+    score: "Production Core",
     connections: ["react", "typescript", "tailwind", "supabase", "reactquery"],
     level: {
       en: "Core Architecture • Production",
       ar: "معمارية أساسية • بيئة إنتاجية",
     },
     projects: {
-      en: ["Iqraa (EdTech AI)", "Maham App", "PDF Builder"],
-      ar: ["إقرأ (التعليم الذكي)", "تطبيق مهام", "محرر مستندات PDF"],
+      en: ["Iqraa (EdTech AI)", "AxpoOS (Enterprise Cockpit)", "Maham (School OS)"],
+      ar: ["إقرأ (التعليم الذكي)", "AxpoOS (لوحة العمليات)", "منصة مَهام (إدارة المدارس)"],
     },
     description: {
       en: "App Router, Server Actions, streaming, Turbopack, and high-performance ISR caching.",
@@ -55,15 +55,15 @@ export const SKILL_ITEMS: SkillItem[] = [
     category: "frontend",
     color: "#61dafb",
     iconSrc: SKILL_ICON_DATA["react"] || "/icons/skills/react.svg",
-    score: "⭐ 9.8 / 10",
+    score: "Production Core",
     connections: ["nextjs", "typescript", "tailwind", "redux", "reactquery"],
     level: {
       en: "Advanced • Concurrent UI",
       ar: "متقدم • واجهات متزامنة",
     },
     projects: {
-      en: ["RoyalMed", "ProHealth", "Iqraa", "Maham App"],
-      ar: ["رويال ميد", "برو هيلث", "منصة إقرأ", "تطبيق مهام"],
+      en: ["RoyalMed", "ProHealth", "Iqraa", "Maham Platform"],
+      ar: ["رويال ميد", "برو هيلث", "منصة إقرأ", "منصة مَهام"],
     },
     description: {
       en: "Concurrent rendering, transitions, custom hooks, and robust component architecture.",
@@ -76,15 +76,15 @@ export const SKILL_ITEMS: SkillItem[] = [
     category: "frontend",
     color: "#3178c6",
     iconSrc: SKILL_ICON_DATA["typescript"] || "/icons/skills/typescript.svg",
-    score: "⭐ 9.7 / 10",
+    score: "Production Core",
     connections: ["javascript", "nextjs", "react", "nodejs"],
     level: {
       en: "Advanced • Strict Typing",
       ar: "متقدم • أنماط صارمة",
     },
     projects: {
-      en: ["Iqraa Platform", "Maham App", "PDF Builder"],
-      ar: ["منصة إقرأ", "تطبيق مهام", "محرر PDF المؤسسي"],
+      en: ["Iqraa Platform", "AxpoOS", "Maham Platform"],
+      ar: ["منصة إقرأ", "AxpoOS", "منصة مَهام"],
     },
     description: {
       en: "Strict type safety, generics, discriminated unions, and scalable codebase contracts.",
@@ -97,15 +97,15 @@ export const SKILL_ITEMS: SkillItem[] = [
     category: "frontend",
     color: "#38bdf8",
     iconSrc: SKILL_ICON_DATA["tailwind"] || "/icons/skills/tailwind.svg",
-    score: "⭐ 9.9 / 10",
+    score: "Production Core",
     connections: ["nextjs", "react", "shadcnui", "css3"],
     level: {
       en: "Expert • Design Systems",
       ar: "خبير • نظم التصميم والـ RTL",
     },
     projects: {
-      en: ["Iqraa", "Maham App", "RoyalMed", "ProHealth"],
-      ar: ["منصة إقرأ", "تطبيق مهام", "رويال ميد", "برو هيلث"],
+      en: ["Iqraa", "Maham Platform", "RoyalMed", "ProHealth"],
+      ar: ["منصة إقرأ", "منصة مَهام", "رويال ميد", "برو هيلث"],
     },
     description: {
       en: "Utility-first design systems, custom themes, arbitrary variants, and seamless RTL.",
@@ -118,15 +118,15 @@ export const SKILL_ITEMS: SkillItem[] = [
     category: "frontend",
     color: "#ff4154",
     iconSrc: SKILL_ICON_DATA["reactquery"] || "/icons/skills/reactquery.svg",
-    score: "⭐ 9.6 / 10",
+    score: "Server State",
     connections: ["nextjs", "react", "supabase", "typescript"],
     level: {
       en: "Advanced • Server State",
       ar: "متقدم • إدارة ومزامنة السيرفر",
     },
     projects: {
-      en: ["Iqraa (EdTech)", "Maham App (Task Core)"],
-      ar: ["منصة إقرأ", "تطبيق مهام"],
+      en: ["Iqraa (EdTech)", "Maham Platform"],
+      ar: ["منصة إقرأ", "منصة مَهام"],
     },
     description: {
       en: "Optimistic mutations, cache invalidation, automated refetching, and offline caching.",
@@ -139,15 +139,15 @@ export const SKILL_ITEMS: SkillItem[] = [
     category: "frontend",
     color: "#e2e8f0",
     iconSrc: SKILL_ICON_DATA["shadcnui"] || "/icons/skills/shadcnui.svg",
-    score: "⭐ 9.7 / 10",
+    score: "Design System",
     connections: ["tailwind", "react", "nextjs"],
     level: {
       en: "Advanced • Radix Primitives",
       ar: "متقدم • مكونات Radix المعيارية",
     },
     projects: {
-      en: ["Iqraa", "Maham App", "Personal Portfolio"],
-      ar: ["منصة إقرأ", "تطبيق مهام", "البورتفوليو الشخصي"],
+      en: ["Iqraa", "Maham Platform", "Personal Portfolio"],
+      ar: ["منصة إقرأ", "منصة مَهام", "البورتفوليو الشخصي"],
     },
     description: {
       en: "Accessible Radix UI primitives, design consistency, and custom dialog architectures.",
@@ -160,7 +160,7 @@ export const SKILL_ITEMS: SkillItem[] = [
     category: "frontend",
     color: "#f43f5e",
     iconSrc: SKILL_ICON_DATA["framermotion"] || "/icons/skills/framermotion.svg",
-    score: "⭐ 9.5 / 10",
+    score: "60FPS UI",
     connections: ["react", "nextjs", "tailwind"],
     level: {
       en: "Advanced • 60FPS Physics",
@@ -181,15 +181,15 @@ export const SKILL_ITEMS: SkillItem[] = [
     category: "frontend",
     color: "#764abc",
     iconSrc: SKILL_ICON_DATA["redux"] || "/icons/skills/redux.svg",
-    score: "⭐ 9.4 / 10",
+    score: "Client State",
     connections: ["react", "nextjs", "typescript"],
     level: {
       en: "Advanced • State Stores",
       ar: "متقدم • إدارة الحالة العالمية",
     },
     projects: {
-      en: ["RoyalMed (Redux)", "Maham App (Zustand)"],
-      ar: ["رويال ميد (Redux)", "تطبيق مهام (Zustand)"],
+      en: ["RoyalMed (Redux)", "Maham Platform (Zustand)"],
+      ar: ["رويال ميد (Redux)", "منصة مَهام (Zustand)"],
     },
     description: {
       en: "Predictable state slices, persistent stores, and client session hydration.",
@@ -202,7 +202,7 @@ export const SKILL_ITEMS: SkillItem[] = [
     category: "frontend",
     color: "#f7df1e",
     iconSrc: SKILL_ICON_DATA["javascript"] || "/icons/skills/javascript.svg",
-    score: "⭐ 9.8 / 10",
+    score: "Core Language",
     connections: ["typescript", "react", "nodejs", "html5"],
     level: {
       en: "Expert • Modern ESNext",
@@ -223,7 +223,7 @@ export const SKILL_ITEMS: SkillItem[] = [
     category: "frontend",
     color: "#e34f26",
     iconSrc: SKILL_ICON_DATA["html5"] || "/icons/skills/html5.svg",
-    score: "⭐ 9.9 / 10",
+    score: "Semantic Web",
     connections: ["css3", "javascript", "react"],
     level: {
       en: "Expert • Semantic Web",
@@ -244,7 +244,7 @@ export const SKILL_ITEMS: SkillItem[] = [
     category: "frontend",
     color: "#1572b6",
     iconSrc: SKILL_ICON_DATA["css3"] || "/icons/skills/css3.svg",
-    score: "⭐ 9.8 / 10",
+    score: "Layout Engine",
     connections: ["html5", "tailwind", "framermotion"],
     level: {
       en: "Expert • Layout Engines",
@@ -269,7 +269,7 @@ export const SKILL_ITEMS: SkillItem[] = [
     category: "backend",
     color: "#5fa04e",
     iconSrc: SKILL_ICON_DATA["nodejs"] || "/icons/skills/nodejs.svg",
-    score: "⭐ 9.6 / 10",
+    score: "Backend Engine",
     connections: ["express", "mongodb", "postgresql", "nestjs", "javascript", "typescript"],
     level: {
       en: "Advanced • Backend Services",
@@ -290,14 +290,14 @@ export const SKILL_ITEMS: SkillItem[] = [
     category: "backend",
     color: "#a1a1aa",
     iconSrc: SKILL_ICON_DATA["express"] || "/icons/skills/express.svg",
-    score: "⭐ 9.6 / 10",
+    score: "API Services",
     connections: ["nodejs", "mongodb", "restapi"],
     level: {
       en: "Advanced • API Middleware",
       ar: "متقدم • سلاسل الميدلوير والتوثيق",
     },
     projects: {
-      en: ["RoyalMed (رويال ميد)", "ProHealth (برو هيلث)", "Frenzy Blog"],
+      en: ["RoyalMed", "ProHealth", "Frenzy Blog"],
       ar: ["رويال ميد", "برو هيلث", "فرينزي بلوج"],
     },
     description: {
@@ -311,7 +311,7 @@ export const SKILL_ITEMS: SkillItem[] = [
     category: "backend",
     color: "#e0234e",
     iconSrc: SKILL_ICON_DATA["nestjs"] || "/icons/skills/nestjs.svg",
-    score: "⭐ 9.2 / 10",
+    score: "Enterprise Modular",
     connections: ["nodejs", "postgresql", "typescript"],
     level: {
       en: "Enterprise • Modular Backend",
@@ -332,15 +332,15 @@ export const SKILL_ITEMS: SkillItem[] = [
     category: "backend",
     color: "#3ecf8e",
     iconSrc: SKILL_ICON_DATA["supabase"] || "/icons/skills/supabase.svg",
-    score: "⭐ 9.8 / 10",
+    score: "Realtime Cloud",
     connections: ["postgresql", "nextjs", "react", "reactquery"],
     level: {
       en: "Production • Realtime & Auth",
       ar: "إنتاجي • التزامن الفوري وحماية RLS",
     },
     projects: {
-      en: ["Iqraa Platform", "Maham App", "PDF Builder"],
-      ar: ["منصة إقرأ", "تطبيق مهام", "محرر مستندات PDF"],
+      en: ["Iqraa Platform", "Traxr", "Maham Platform"],
+      ar: ["منصة إقرأ", "منصة تتبع Traxr", "منصة مَهام"],
     },
     description: {
       en: "Row-Level Security (RLS), edge functions, realtime data sync, and storage buckets.",
@@ -353,15 +353,15 @@ export const SKILL_ITEMS: SkillItem[] = [
     category: "backend",
     color: "#4169e1",
     iconSrc: SKILL_ICON_DATA["postgresql"] || "/icons/skills/postgresql.svg",
-    score: "⭐ 9.6 / 10",
+    score: "Production DB",
     connections: ["supabase", "nestjs", "nodejs", "nextjs"],
     level: {
       en: "Advanced • Relational Data",
       ar: "متقدم • قواعد البيانات العلائقية",
     },
     projects: {
-      en: ["Iqraa Platform", "Maham App"],
-      ar: ["منصة إقرأ", "تطبيق مهام"],
+      en: ["Iqraa Platform", "Traxr", "Maham Platform"],
+      ar: ["منصة إقرأ", "منصة Traxr", "منصة مَهام"],
     },
     description: {
       en: "ACID transactions, relational schema design, complex joins, indexing, and JSONB.",
@@ -374,7 +374,7 @@ export const SKILL_ITEMS: SkillItem[] = [
     category: "backend",
     color: "#47a248",
     iconSrc: SKILL_ICON_DATA["mongodb"] || "/icons/skills/mongodb.svg",
-    score: "⭐ 9.5 / 10",
+    score: "Document Store",
     connections: ["nodejs", "express", "react"],
     level: {
       en: "Advanced • Document Store",
@@ -395,7 +395,7 @@ export const SKILL_ITEMS: SkillItem[] = [
     category: "backend",
     color: "#06b6d4",
     iconSrc: SKILL_ICON_DATA["restapi"] || "/icons/skills/restapi.svg",
-    score: "⭐ 9.8 / 10",
+    score: "Auth & Security",
     connections: ["nodejs", "express", "react", "nextjs"],
     level: {
       en: "Expert • Secure Auth Pipelines",
@@ -420,7 +420,7 @@ export const SKILL_ITEMS: SkillItem[] = [
     category: "systems",
     color: "#2496ed",
     iconSrc: SKILL_ICON_DATA["docker"] || "/icons/skills/docker.svg",
-    score: "⭐ 8.9 / 10",
+    score: "Platform & Deploy",
     connections: ["nodejs", "nestjs", "linux", "postgresql"],
     level: {
       en: "Intermediate • Containers",
@@ -441,7 +441,7 @@ export const SKILL_ITEMS: SkillItem[] = [
     category: "systems",
     color: "#f05032",
     iconSrc: SKILL_ICON_DATA["git"] || "/icons/skills/git.svg",
-    score: "⭐ 9.8 / 10",
+    score: "CI/CD & Workflows",
     connections: ["linux", "nextjs", "react", "docker"],
     level: {
       en: "Advanced • CI/CD Workflows",
@@ -462,15 +462,15 @@ export const SKILL_ITEMS: SkillItem[] = [
     category: "systems",
     color: "#47848f",
     iconSrc: SKILL_ICON_DATA["electron"] || "/icons/skills/electron.svg",
-    score: "⭐ 9.1 / 10",
+    score: "Desktop Runtime",
     connections: ["react", "nodejs", "typescript"],
     level: {
       en: "Advanced • Desktop Apps",
       ar: "متقدم • تطبيقات سطح المكتب",
     },
     projects: {
-      en: ["Enterprise Dynamic PDF Builder"],
-      ar: ["نظام بناء وتصدير المستندات المؤسسي"],
+      en: ["Maham Desktop (School OS)"],
+      ar: ["تطبيق مَهام المكتبي (إدارة المدارس)"],
     },
     description: {
       en: "Cross-platform desktop packaging, native IPC bridge, file system access, and installers.",
@@ -483,7 +483,7 @@ export const SKILL_ITEMS: SkillItem[] = [
     category: "systems",
     color: "#fcc624",
     iconSrc: SKILL_ICON_DATA["linux"] || "/icons/skills/linux.svg",
-    score: "⭐ 9.2 / 10",
+    score: "Server Operations",
     connections: ["docker", "git", "python", "nodejs"],
     level: {
       en: "Advanced • Shell & Servers",
@@ -504,7 +504,7 @@ export const SKILL_ITEMS: SkillItem[] = [
     category: "systems",
     color: "#21759b",
     iconSrc: SKILL_ICON_DATA["wordpress"] || "/icons/skills/wordpress.svg",
-    score: "⭐ 9.5 / 10",
+    score: "Headless & Themes",
     connections: ["javascript", "html5", "css3"],
     level: {
       en: "Advanced • Custom Themes",
@@ -525,7 +525,7 @@ export const SKILL_ITEMS: SkillItem[] = [
     category: "systems",
     color: "#3776ab",
     iconSrc: SKILL_ICON_DATA["python"] || "/icons/skills/python.svg",
-    score: "⭐ 9.1 / 10",
+    score: "Automation & AI",
     connections: ["linux", "cplusplus", "nodejs"],
     level: {
       en: "Advanced • Automation & AI",
@@ -546,7 +546,7 @@ export const SKILL_ITEMS: SkillItem[] = [
     category: "systems",
     color: "#00599c",
     iconSrc: SKILL_ICON_DATA["cplusplus"] || "/icons/skills/cplusplus.svg",
-    score: "⭐ 8.9 / 10",
+    score: "Embedded Systems",
     connections: ["arduino", "python", "linux"],
     level: {
       en: "Academic • Embedded Systems",
@@ -567,7 +567,7 @@ export const SKILL_ITEMS: SkillItem[] = [
     category: "systems",
     color: "#00979d",
     iconSrc: SKILL_ICON_DATA["arduino"] || "/icons/skills/arduino.svg",
-    score: "⭐ 9.1 / 10",
+    score: "Sensors & Robotics",
     connections: ["cplusplus", "python"],
     level: {
       en: "Mechatronics • Sensors & Actuators",

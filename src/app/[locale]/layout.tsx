@@ -1,15 +1,22 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
 import { CosmicCanvas } from "@/components/canvas/CosmicCanvas";
-import { CosmicAssistantModal } from "@/components/cosmic/CosmicAssistantModal";
 import { AnalyticsProvider } from "@/components/analytics/AnalyticsProvider";
+import { PostHogProvider } from "@/components/providers/PostHogProvider";
 import { JsonLd } from "@/components/seo/JsonLd";
+
+const Footer = dynamic(() =>
+  import("@/components/layout/Footer").then((m) => m.Footer)
+);
+const CosmicAssistantModal = dynamic(() =>
+  import("@/components/cosmic/CosmicAssistantModal").then((m) => m.CosmicAssistantModal)
+);
 import { siteConfig } from "@/config/site";
 import "@/styles/globals.css";
 
@@ -91,9 +98,10 @@ export async function generateMetadata({
     icons: {
       icon: [
         { url: "/favicon.svg", type: "image/svg+xml" },
+        { url: "/favicon.ico", sizes: "any" },
       ],
       apple: [
-        { url: "/favicon.svg", type: "image/svg+xml" },
+        { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
       ],
     },
     category: "technology",
@@ -132,24 +140,26 @@ export default async function RootLayout({
     >
       <body className="min-h-screen bg-space-950 text-slate-100 antialiased relative selection:bg-nebula-violet/30 selection:text-white">
         <JsonLd locale={locale} />
-        <ThemeProvider>
-          <NextIntlClientProvider messages={messages}>
-            {/* Expansive seamless cosmic atmosphere (No rigid grids) */}
-            <div className="fixed inset-0 cosmic-atmosphere pointer-events-none z-0" />
+        <PostHogProvider>
+          <ThemeProvider>
+            <NextIntlClientProvider messages={messages}>
+              {/* Expansive seamless cosmic atmosphere (No rigid grids) */}
+              <div className="fixed inset-0 cosmic-atmosphere pointer-events-none z-0" />
 
-            {/* Stardust Canvas Engine */}
-            <CosmicCanvas />
+              {/* Stardust Canvas Engine */}
+              <CosmicCanvas />
 
-            <div className="relative z-10 flex flex-col min-h-screen w-full">
-              <Navbar />
-              <main className="flex-1 w-full">{children}</main>
-              <Footer />
-            </div>
+              <div className="relative z-10 flex flex-col min-h-screen w-full">
+                <Navbar />
+                <main className="flex-1 w-full">{children}</main>
+                <Footer />
+              </div>
 
-            {/* AI Assistant Floating Widget */}
-            <CosmicAssistantModal />
-          </NextIntlClientProvider>
-        </ThemeProvider>
+              {/* AI Assistant Floating Widget */}
+              <CosmicAssistantModal />
+            </NextIntlClientProvider>
+          </ThemeProvider>
+        </PostHogProvider>
 
         {/* Vercel Web Analytics & Core Web Vitals (Client-Only dynamic) */}
         <AnalyticsProvider />

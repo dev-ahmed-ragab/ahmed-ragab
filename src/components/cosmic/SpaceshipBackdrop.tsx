@@ -18,7 +18,7 @@ interface SpaceshipBackdropProps {
 export function SpaceshipBackdrop({
   containerRef,
   className = "",
-  assetSrc = "/assets/projects-spaceship-crew-pristine.webp",
+  assetSrc = "/assets/projects-spaceship-crew.png",
 }: SpaceshipBackdropProps) {
   const [isMobile, setIsMobile] = useState(false);
   const shouldReduceMotion = useReducedMotion();
@@ -70,12 +70,14 @@ export function SpaceshipBackdrop({
           loading="lazy"
           decoding="async"
           fetchPriority="low"
-          className="w-full h-full object-contain sm:object-cover object-center mix-blend-screen opacity-75 sm:opacity-90 filter contrast-[1.12] brightness-[1.02]"
+          style={{
+            maskImage:
+              "linear-gradient(to bottom, transparent 0%, black 8%, black 88%, transparent 100%)",
+            WebkitMaskImage:
+              "linear-gradient(to bottom, transparent 0%, black 8%, black 88%, transparent 100%)",
+          }}
+          className="w-full h-full object-contain sm:object-cover object-center opacity-85 sm:opacity-95 filter drop-shadow-[0_20px_50px_rgba(6,182,212,0.18)]"
         />
-
-        {/* Soft seamless vertical blends into Deep Space (#030712) */}
-        <div className="absolute inset-x-0 top-0 h-32 sm:h-48 bg-gradient-to-b from-[#030712] via-[#030712]/60 to-transparent pointer-events-none" />
-        <div className="absolute inset-x-0 bottom-0 h-32 sm:h-48 bg-gradient-to-t from-[#030712] via-[#030712]/80 to-transparent pointer-events-none" />
       </motion.div>
     </div>
   );

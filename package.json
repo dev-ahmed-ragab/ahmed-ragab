@@ -4,8 +4,9 @@
   "private": true,
   "scripts": {
     "clean": "node -e \"require('fs').rmSync('.next', { recursive: true, force: true }); console.log('Cleaned .next cache!')\"",
-    "dev": "next dev",
-    "dev:clean": "npm run clean && next dev",
+    "dev": "next dev --turbopack",
+    "dev:clean": "npm run clean && next dev --turbopack",
+    "dev:webpack": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -21,9 +22,10 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^14.14.0",
-    "gsap": "^3.12.7",
     "lottie-react": "^3.1.2",
     "lucide-react": "^1.16.0",
+    "motion-dom": "^14.14.0",
+    "motion-utils": "^14.7.0",
     "next": "^15.2.1",
     "next-intl": "^3.26.5",
     "next-themes": "^0.4.6",
