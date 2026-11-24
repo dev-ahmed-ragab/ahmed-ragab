@@ -18,7 +18,7 @@ interface SpaceshipBackdropProps {
 export function SpaceshipBackdrop({
   containerRef,
   className = "",
-  assetSrc = "/assets/projects-spaceship-crew.webp",
+  assetSrc = "/assets/projects-spaceship-crew-pristine.webp",
 }: SpaceshipBackdropProps) {
   const [isMobile, setIsMobile] = useState(false);
   const shouldReduceMotion = useReducedMotion();
@@ -67,7 +67,10 @@ export function SpaceshipBackdrop({
         <img
           src={assetSrc}
           alt="Ahmed Ragab Spaceship & Orbital Maintenance Crew"
-          className="w-full h-full object-cover object-center opacity-30 sm:opacity-35 filter contrast-[1.05] brightness-[0.88]"
+          loading="lazy"
+          decoding="async"
+          fetchPriority="low"
+          className="w-full h-full object-contain sm:object-cover object-center mix-blend-screen opacity-75 sm:opacity-90 filter contrast-[1.12] brightness-[1.02]"
         />
 
         {/* Soft seamless vertical blends into Deep Space (#030712) */}

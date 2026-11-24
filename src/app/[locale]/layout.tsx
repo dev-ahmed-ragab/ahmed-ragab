@@ -8,6 +8,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { CosmicCanvas } from "@/components/canvas/CosmicCanvas";
 import { CosmicAssistantModal } from "@/components/cosmic/CosmicAssistantModal";
+import { AnalyticsProvider } from "@/components/analytics/AnalyticsProvider";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { siteConfig } from "@/config/site";
 import "@/styles/globals.css";
@@ -89,10 +90,10 @@ export async function generateMetadata({
     },
     icons: {
       icon: [
-        { url: "/assets/astronaut-transparent.png", type: "image/png" },
+        { url: "/favicon.svg", type: "image/svg+xml" },
       ],
       apple: [
-        { url: "/assets/astronaut-transparent.png" },
+        { url: "/favicon.svg", type: "image/svg+xml" },
       ],
     },
     category: "technology",
@@ -149,6 +150,9 @@ export default async function RootLayout({
             <CosmicAssistantModal />
           </NextIntlClientProvider>
         </ThemeProvider>
+
+        {/* Vercel Web Analytics & Core Web Vitals (Client-Only dynamic) */}
+        <AnalyticsProvider />
       </body>
     </html>
   );

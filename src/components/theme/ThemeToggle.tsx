@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
 import { useTranslations, useLocale } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles, Palette, Waves, ChevronDown, Check } from "lucide-react";
+import { Sparkles, Palette, Waves, RefreshCw } from "lucide-react";
 
 export type CosmicThemeId = "deep-space" | "midnight-violet" | "abyss-cyan";
 
@@ -21,7 +21,7 @@ interface ThemeOption {
   };
 }
 
-const THEME_OPTIONS: ThemeOption[] = [
+export const THEME_OPTIONS: ThemeOption[] = [
   {
     id: "deep-space",
     labelKey: "deepSpace",
@@ -61,20 +61,20 @@ const THEME_OPTIONS: ThemeOption[] = [
 ];
 
 interface ThemeToggleProps {
-  variant?: "dropdown" | "mobile";
+  variant?: "cycler" | "dropdown" | "mobile";
   className?: string;
   onThemeSelect?: () => void;
 }
 
 export function ThemeToggle({
-  variant = "dropdown",
+  variant = "cycler",
   className = "",
   onThemeSelect,
 }: ThemeToggleProps) {
   const { theme, setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const [rotation, setRotation] = useState(0);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   const t = useTranslations("theme");
   const locale = useLocale();
@@ -84,43 +84,30 @@ export function ThemeToggle({
     setMounted(true);
   }, []);
 
-  // Handle click outside to close dropdown
-  useEffect(() => {
-    if (!isOpen) return;
-
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
-        setIsOpen(false);
-      }
-    };
-
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setIsOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    document.addEventListener("keydown", handleKeyDown);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [isOpen]);
-
   const currentThemeId = (
-    mounted ? (theme || resolvedTheme || "deep-space") : "deep-space"
+    mounted ? theme || resolvedTheme || "deep-space" : "deep-space"
   ) as CosmicThemeId;
 
-  const currentOption =
-    THEME_OPTIONS.find((opt) => opt.id === currentThemeId) || THEME_OPTIONS[0];
+  const currentIndex = THEME_OPTIONS.findIndex((opt) => opt.id === currentThemeId);
+  const safeIndex = currentIndex >= 0 ? currentIndex : 0;
+  const currentOption = THEME_OPTIONS[safeIndex];
 
-  const handleSelect = (id: CosmicThemeId) => {
-    setTheme(id);
-    setIsOpen(false);
+  // 1-Click Cycle Handler: deep-space -> midnight-violet -> abyss-cyan -> deep-space
+  const handleCycleTheme = () => {
+    const nextIndex = (safeIndex + 1) % THEME_OPTIONS.length;
+    const nextOption = THEME_OPTIONS[nextIndex];
+    setTheme(nextOption.id);
+    setRotation((prev) => prev + 120);
+
+    // Show floating feedback micro-toast
+    const feedbackText = `${nextOption.emoji} ${t(nextOption.labelKey)}`;
+    setToastMessage(feedbackText);
+
+    // Auto-dismiss after 1.4s
+    setTimeout(() => {
+      setToastMessage(null);
+    }, 1400);
+
     onThemeSelect?.();
   };
 
@@ -128,18 +115,18 @@ export function ThemeToggle({
     if (variant === "mobile") {
       return (
         <div className={`space-y-2 ${className}`}>
-          <div className="h-10 rounded-xl bg-white/5 animate-pulse" />
+          <div className="h-12 rounded-xl bg-white/5 animate-pulse" />
         </div>
       );
     }
     return (
       <div
-        className={`min-h-[40px] min-w-[40px] rounded-xl border border-white/10 bg-white/5 animate-pulse ${className}`}
+        className={`min-h-[40px] w-28 rounded-xl border border-white/10 bg-white/5 animate-pulse ${className}`}
       />
     );
   }
 
-  // Mobile drawer variant: full-width segmented list with preview glow dots
+  // Mobile drawer variant: full-width 3-segment switcher
   if (variant === "mobile") {
     return (
       <div className={`space-y-2.5 w-full ${className}`}>
@@ -147,12 +134,12 @@ export function ThemeToggle({
           <span className="text-[11px] font-mono font-bold text-slate-400 uppercase tracking-wider">
             {t("title")}
           </span>
-          <span className="text-xs text-slate-400 font-mono flex items-center gap-1.5">
+          <span className="text-xs text-slate-300 font-mono flex items-center gap-1.5">
             <span
-              className="w-2 h-2 rounded-full animate-pulse shadow-sm"
+              className="w-2 h-2 rounded-full shadow-sm"
               style={{ backgroundColor: currentOption.colors.primary }}
             />
-            {t(currentOption.labelKey)}
+            {currentOption.emoji} {t(currentOption.labelKey)}
           </span>
         </div>
 
@@ -162,11 +149,14 @@ export function ThemeToggle({
             return (
               <button
                 key={opt.id}
-                onClick={() => handleSelect(opt.id)}
-                className={`relative min-h-[52px] p-2 rounded-xl border text-center flex flex-col items-center justify-center gap-1.5 transition-all active:scale-95 ${
+                onClick={() => {
+                  setTheme(opt.id);
+                  onThemeSelect?.();
+                }}
+                className={`relative min-h-[50px] p-2 rounded-xl border text-center flex flex-col items-center justify-center gap-1 transition-all active:scale-95 ${
                   isSelected
-                    ? "border-white/30 bg-white/10 shadow-lg"
-                    : "border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/20"
+                    ? "border-cyan-400/40 bg-white/10 shadow-lg text-white"
+                    : "border-white/10 bg-white/5 hover:bg-white/10 text-slate-300"
                 }`}
                 style={{
                   boxShadow: isSelected
@@ -176,34 +166,20 @@ export function ThemeToggle({
                 aria-pressed={isSelected}
                 aria-label={t(opt.labelKey)}
               >
-                {/* Glowing preview dual dots */}
                 <div className="flex items-center gap-1">
                   <span
-                    className="w-2.5 h-2.5 rounded-full ring-2 ring-white/10"
+                    className="w-2.5 h-2.5 rounded-full ring-1 ring-white/20"
                     style={{ backgroundColor: opt.colors.primary }}
                   />
                   <span
-                    className="w-2 h-2 rounded-full"
+                    className="w-2 h-2 rounded-full opacity-80"
                     style={{ backgroundColor: opt.colors.accent }}
                   />
                 </div>
 
-                <span
-                  className={`text-[11px] font-semibold tracking-tight truncate max-w-full ${
-                    isSelected ? "text-white" : "text-slate-300"
-                  }`}
-                >
+                <span className="text-[11px] font-semibold tracking-tight truncate max-w-full">
                   {t(opt.labelKey)}
                 </span>
-
-                {isSelected && (
-                  <motion.div
-                    layoutId="activeThemePillMobile"
-                    className="absolute inset-0 rounded-xl border-2 pointer-events-none"
-                    style={{ borderColor: opt.colors.primary }}
-                    transition={{ type: "spring", stiffness: 350, damping: 30 }}
-                  />
-                )}
               </button>
             );
           })}
@@ -212,117 +188,67 @@ export function ThemeToggle({
     );
   }
 
-  // Desktop variant: compact glass button + dropdown with preview dots
+  // Desktop variant: Tactile 1-Click Cosmic Cycler Capsule (No Clunky Dropdown!)
+  const IconComponent = currentOption.icon;
+
   return (
-    <div ref={dropdownRef} className={`relative ${className}`}>
-      {/* Trigger Button */}
-      <button
-        onClick={() => setIsOpen((prev) => !prev)}
-        className="min-h-[40px] px-3 py-2 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/25 flex items-center gap-2 text-xs font-semibold text-slate-200 transition-all active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-nebula-violet"
-        aria-haspopup="true"
-        aria-expanded={isOpen}
-        aria-label={`${t("title")}: ${t(currentOption.labelKey)}`}
-        title={t("title")}
+    <div className={`relative ${className}`}>
+      {/* 1-Click Cycler Button */}
+      <motion.button
+        type="button"
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.94 }}
+        onClick={handleCycleTheme}
+        className="min-h-[40px] px-3.5 py-2 rounded-xl border border-white/10 bg-white/[0.04] hover:bg-white/[0.08] hover:border-cyan-400/35 flex items-center gap-2.5 text-xs font-semibold text-slate-200 transition-all shadow-sm backdrop-blur-md cursor-pointer select-none group focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+        aria-label={`${t("title")}: ${t(currentOption.labelKey)}. Click to cycle next cosmic theme.`}
+        title={isArabic ? "انقر للتبديل السريع بين ألوان الفضاء" : "Click to cycle cosmic theme"}
       >
-        {/* Glow dot indicator */}
-        <span className="relative flex h-2.5 w-2.5 shrink-0">
+        {/* Animated Glowing Dual Orb */}
+        <span className="relative flex h-3 w-3 shrink-0 items-center justify-center">
           <span
-            className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75"
+            className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-60"
             style={{ backgroundColor: currentOption.colors.primary }}
           />
           <span
-            className="relative inline-flex rounded-full h-2.5 w-2.5 ring-1 ring-white/20"
+            className="relative inline-flex rounded-full h-2.5 w-2.5 ring-1 ring-white/20 shadow-sm transition-colors duration-300"
             style={{ backgroundColor: currentOption.colors.primary }}
           />
         </span>
 
-        {/* Theme Title */}
-        <span className="hidden xl:inline text-xs font-medium">
+        {/* Current Theme Name with smooth color transition */}
+        <span className="text-xs font-medium tracking-tight text-slate-200 group-hover:text-white transition-colors">
           {t(currentOption.labelKey)}
         </span>
 
-        <ChevronDown
-          className={`w-3.5 h-3.5 text-slate-400 transition-transform duration-200 ${
-            isOpen ? "rotate-180" : ""
-          }`}
-        />
-      </button>
+        {/* Rotating Icon Feedback */}
+        <motion.div
+          animate={{ rotate: rotation }}
+          transition={{ type: "spring", stiffness: 220, damping: 18 }}
+          className="shrink-0 text-slate-400 group-hover:text-cyan-300 transition-colors"
+        >
+          <IconComponent className="w-3.5 h-3.5" />
+        </motion.div>
+      </motion.button>
 
-      {/* Dropdown Menu */}
+      {/* Floating Micro-Toast Feedback on Theme Change */}
       <AnimatePresence>
-        {isOpen && (
+        {toastMessage && (
           <motion.div
-            initial={{ opacity: 0, y: 8, scale: 0.96 }}
+            initial={{ opacity: 0, y: 6, scale: 0.92 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 6, scale: 0.96 }}
-            transition={{ duration: 0.16, ease: "easeOut" }}
-            className={`absolute top-full mt-2 w-56 rounded-2xl p-2 glass-panel shadow-2xl border border-white/15 z-50 backdrop-blur-2xl ${
+            exit={{ opacity: 0, y: -4, scale: 0.92 }}
+            transition={{ duration: 0.16 }}
+            className={`absolute top-full mt-2 ${
               isArabic ? "start-0" : "end-0"
-            }`}
-            style={{ backgroundColor: "rgba(10, 14, 28, 0.92)" }}
-            role="menu"
-            aria-orientation="vertical"
+            } z-50 pointer-events-none whitespace-nowrap px-3 py-1.5 rounded-xl border border-cyan-400/35 bg-[#060a14]/95 text-cyan-200 text-xs font-mono font-bold shadow-xl backdrop-blur-xl flex items-center gap-1.5`}
           >
-            <div className="px-2.5 py-1.5 text-[10px] font-mono font-bold text-slate-400 uppercase tracking-wider border-b border-white/10 mb-1">
-              {t("title")}
-            </div>
-
-            <div className="space-y-1">
-              {THEME_OPTIONS.map((opt) => {
-                const isSelected = opt.id === currentThemeId;
-                const IconComponent = opt.icon;
-                return (
-                  <button
-                    key={opt.id}
-                    onClick={() => handleSelect(opt.id)}
-                    className={`w-full px-2.5 py-2 rounded-xl flex items-center justify-between text-start text-xs transition-all ${
-                      isSelected
-                        ? "bg-white/15 text-white font-bold shadow-sm"
-                        : "text-slate-300 hover:text-white hover:bg-white/10"
-                    }`}
-                    role="menuitem"
-                  >
-                    <div className="flex items-center gap-2.5 min-w-0">
-                      {/* Dual preview color dots */}
-                      <div className="flex items-center gap-1 shrink-0">
-                        <span
-                          className="w-3 h-3 rounded-full ring-1 ring-white/20 shadow-sm"
-                          style={{
-                            backgroundColor: opt.colors.primary,
-                            boxShadow: isSelected
-                              ? `0 0 8px ${opt.colors.primary}`
-                              : "none",
-                          }}
-                        />
-                        <span
-                          className="w-2 h-2 rounded-full opacity-80"
-                          style={{ backgroundColor: opt.colors.accent }}
-                        />
-                      </div>
-
-                      <div className="truncate">
-                        <div className="text-xs font-semibold leading-tight truncate">
-                          {t(opt.labelKey)}
-                        </div>
-                        <div className="text-[10px] text-slate-400 font-mono truncate">
-                          {t(opt.descKey)}
-                        </div>
-                      </div>
-                    </div>
-
-                    {isSelected && (
-                      <Check
-                        className="w-4 h-4 shrink-0 ms-2"
-                        style={{ color: opt.colors.primary }}
-                      />
-                    )}
-                  </button>
-                );
-              })}
-            </div>
+            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping" />
+            <span>{toastMessage}</span>
           </motion.div>
         )}
       </AnimatePresence>
     </div>
   );
 }
+
+export default ThemeToggle;

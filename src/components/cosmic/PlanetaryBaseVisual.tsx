@@ -65,6 +65,9 @@ export function PlanetaryBaseVisual({
         <img
           src="/assets/experience-mission-flag.webp"
           alt="Ahmed Ragab Planting Mission Flag on Planetary Surface with Saturn"
+          loading="lazy"
+          decoding="async"
+          fetchPriority="low"
           className="w-full h-full object-cover object-center filter contrast-[1.05] brightness-95 group-hover:scale-105 transition-transform duration-700 ease-out"
           onLoad={() => setImageLoaded(true)}
         />

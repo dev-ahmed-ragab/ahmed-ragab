@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { SpaceshipBackdrop } from "@/components/cosmic/SpaceshipBackdrop";
 import { motion, AnimatePresence } from "framer-motion";
+import { trackProjectClick } from "@/lib/analytics";
 
 const INITIAL_VISIBLE_COUNT = 6;
 
@@ -106,8 +107,9 @@ export function ProjectsSection() {
                       <img
                         src={projectImg}
                         alt={project.title[locale]}
-                        className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
                         loading="lazy"
+                        decoding="async"
+                        className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
                       />
 
                       {/* Vignette overlay */}
@@ -164,6 +166,13 @@ export function ProjectsSection() {
                           href={project.links.demo}
                           target="_blank"
                           rel="noopener noreferrer"
+                          onClick={() =>
+                            trackProjectClick(
+                              project.title.en,
+                              "demo",
+                              project.links.demo
+                            )
+                          }
                           title={isAr ? "زيارة الموقع" : "Live Demo"}
                           className="min-w-[40px] min-h-[40px] flex items-center justify-center rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white transition-colors"
                         >
@@ -176,6 +185,13 @@ export function ProjectsSection() {
                           href={project.links.github}
                           target="_blank"
                           rel="noopener noreferrer"
+                          onClick={() =>
+                            trackProjectClick(
+                              project.title.en,
+                              "github",
+                              project.links.github
+                            )
+                          }
                           title={isAr ? "المستودع البرمجي" : "GitHub Repo"}
                           className="min-w-[40px] min-h-[40px] flex items-center justify-center rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white transition-colors"
                         >

@@ -64,7 +64,11 @@ export function Navbar() {
 
   const toggleLocale = useCallback(() => {
     const nextLocale = locale === "en" ? "ar" : "en";
-    router.replace(pathname, { locale: nextLocale });
+    try {
+      router.replace(pathname, { locale: nextLocale });
+    } catch {
+      window.location.href = nextLocale === "ar" ? "/ar" : "/en";
+    }
   }, [locale, router, pathname]);
 
   const navLinks = [
@@ -147,21 +151,25 @@ export function Navbar() {
 
             {/* Right Action Buttons (Desktop) */}
             <div className="hidden md:flex items-center gap-2.5">
-              {/* Cosmic Theme Switcher */}
-              <ThemeToggle variant="dropdown" />
+              {/* Cosmic Theme 1-Click Cycler */}
+              <ThemeToggle variant="cycler" />
 
-              {/* Language Toggle */}
-              <Button
-                variant="cosmicOutline"
-                size="sm"
+              {/* 1-Click Language Switcher Capsule */}
+              <motion.button
+                type="button"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.94 }}
                 onClick={toggleLocale}
-                className="min-h-[40px] px-3.5 py-2 text-xs font-semibold rounded-xl"
-                title={isArabic ? "Switch to English" : "التبديل إلى العربية"}
-                aria-label={isArabic ? "Switch to English" : "التبديل إلى العربية"}
+                className="min-h-[40px] px-3.5 py-2 text-xs font-semibold rounded-xl border border-white/10 bg-white/[0.04] hover:bg-white/[0.08] hover:border-cyan-400/35 text-slate-200 flex items-center gap-2 transition-all shadow-sm backdrop-blur-md cursor-pointer select-none group focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+                title={isArabic ? "التبديل إلى الإنجليزية" : "Switch to Arabic"}
+                aria-label={isArabic ? "التبديل إلى الإنجليزية" : "Switch to Arabic"}
               >
-                <Globe className="w-3.5 h-3.5 text-nebula-cyan" />
-                <span>{locale === "en" ? "عربي" : "EN"}</span>
-              </Button>
+                <Globe className="w-3.5 h-3.5 text-cyan-400 group-hover:rotate-45 transition-transform duration-300 shrink-0" />
+                <span className="font-mono font-bold tracking-wide text-white">
+                  {locale === "en" ? "العربية" : "English"}
+                </span>
+                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400/80 group-hover:bg-cyan-300 animate-pulse shrink-0" />
+              </motion.button>
 
               {/* CV Download CTA */}
               <Button

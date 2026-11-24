@@ -30,6 +30,19 @@ export interface ExperienceItem {
     ar: string[];
   };
   technologies: string[];
+  image: string;
+  caseStudyId?: string;
+  highlightMetric: {
+    en: string;
+    ar: string;
+  };
+  actionLink?: {
+    label: {
+      en: string;
+      ar: string;
+    };
+    href: string;
+  };
 }
 
 export const experiences: ExperienceItem[] = [
@@ -41,7 +54,7 @@ export const experiences: ExperienceItem[] = [
     },
     company: {
       en: "Iqraa Platform (EdTech & AI)",
-      ar: "منصة إقرأ (تقنيات التعليم والذكاء الاصطناعي)",
+      ar: "منصة إقرأ للتعليم والذكاء الاصطناعي",
     },
     location: {
       en: "Cairo, Egypt",
@@ -53,18 +66,18 @@ export const experiences: ExperienceItem[] = [
     },
     type: "Founder",
     badge: {
-      en: "Startup / Production",
-      ar: "ستارت آب / إنتاجي",
+      en: "Flagship Startup",
+      ar: "المنتج الريادي الأساسي",
     },
     description: {
-      en: "Founded and engineered a complete multi-tenant EdTech platform providing AI-assisted curriculum exploration, automated quiz synthesis, and academic analysis.",
-      ar: "تأسيس وهندسة معمارية منصة تعليمية سحابية متكاملة تقدم حلول الذكاء الاصطناعي لاستكشاف المناهج الدراسية وتوليد الاختبارات وتحليل المحتوى الأكاديمي.",
+      en: "Founded and engineered a complete multi-tenant EdTech SaaS platform serving 100+ active students. Architected custom RAG AI agent pipelines for academic curriculum extraction, automated quiz synthesis, and PostgreSQL Row-Level Security.",
+      ar: "تأسيس وبناء المعمارية الكاملة لمنصة تعليمية سحابية تخدم أكثر من 100 طالب نشط، مزودة بوكلاء ذكاء اصطناعي لاستخراج المناهج وتوليد الاختبارات، مع نظام صلاحيات محكم وحماية Row-Level Security.",
     },
     achievements: {
       en: [
-        "Scaled platform to 100+ active students with sub-second API responses.",
+        "Scaled platform to 100+ active students with sub-second API query latency.",
         "Engineered RAG-based AI pipeline for document summarization with zero vendor lock-in.",
-        "Built multi-role RBAC architecture (Admin, Professor, TA, Student) with Postgres RLS.",
+        "Built multi-role RBAC architecture (Admin, Professor, TA, Student) with Supabase Postgres RLS.",
       ],
       ar: [
         "تشغيل المنصة لأكثر من 100 طالب نشط مع سرعة استجابة فائقة للواجهات البرمجية.",
@@ -73,20 +86,30 @@ export const experiences: ExperienceItem[] = [
       ],
     },
     technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Supabase", "PostgreSQL", "Docker", "AI Agents"],
+    image: "/assets/experience-showcase.jpg",
+    caseStudyId: "iqraa",
+    highlightMetric: {
+      en: "⚡ +100 Active Students • Sub-2s Query Latency • Zero Vendor Lock-in",
+      ar: "⚡ أكثر من 100 طالب نشط • استجابة ذكية أقل من ثانيتين • معمارية مستقلة",
+    },
+    actionLink: {
+      label: { en: "Launch Live Platform →", ar: "زيارة منصة إقرأ مباشرة ←" },
+      href: "https://iqraa.live",
+    },
   },
   {
     id: "nda-contract",
     role: {
-      en: "Full Stack Developer (Part-Time Contract)",
-      ar: "مطور برمجيات متكامل (تعاقد جزئي)",
+      en: "Full Stack Engineer — Maham App & Document Engine",
+      ar: "مطور برمجيات متكامل — تطبيق مهمة ومحرر المستندات",
     },
     company: {
-      en: "Confidential Company (Under NDA)",
-      ar: "شركة خاصة (تحت اتفاقية عدم الإفصاح NDA)",
+      en: "Apptraction (Maham School SaaS)",
+      ar: "شركة أبتراكشن (منصة مهام)",
     },
     location: {
-      en: "Remote",
-      ar: "عن بُعد",
+      en: "Remote Contract",
+      ar: "تعاقد عن بُعد",
     },
     period: {
       en: "August 2025 – Present",
@@ -94,12 +117,12 @@ export const experiences: ExperienceItem[] = [
     },
     type: "Contract",
     badge: {
-      en: "Enterprise Web & Desktop",
+      en: "Enterprise SaaS & Desktop",
       ar: "أنظمة ويب ومكتبي للشركات",
     },
     description: {
-      en: "Architected core features for high-traffic enterprise web and desktop solutions, specializing in custom document canvas builders and secure authentication.",
-      ar: "هندسة وبناء الميزات الجوهرية لأنظمة شركات معقدة تعمل على الويب والديسكتوب، مع التركيز على محرر مستندات تفاعلي ونظام أمان متقدم.",
+      en: "Engineered core modules for enterprise web and desktop solutions, specializing in Canva-style dynamic document canvas builders, SMS OTP security authentication, and cross-platform Electron packaging.",
+      ar: "هندسة وبناء محرر مستندات تفاعلي بنمط Canva بالسحب والإفلات مع تصدير PDF بدقة طباعية ميكرومترية، ونظام أمان متعدد المراحل بـ SMS OTP، وتغليف ديسكتوب بـ Electron وتطبيق ويب تقدمي PWA.",
     },
     achievements: {
       en: [
@@ -116,6 +139,12 @@ export const experiences: ExperienceItem[] = [
       ],
     },
     technologies: ["Next.js", "TypeScript", "Electron", "Supabase", "PWA", "Tailwind CSS", "JWT"],
+    image: "/assets/experience-showcase.jpg",
+    caseStudyId: "dynamic-pdf-builder",
+    highlightMetric: {
+      en: "⚡ 60FPS Drag & Drop • Millimetric Vector PDF • Cross-Platform Web & Desktop",
+      ar: "⚡ سحب وإفلات بـ 60 إطار/ثانية • تصدير PDF ميكرومتري • ويب وديسكتوب",
+    },
   },
   {
     id: "royalmed",
@@ -124,8 +153,8 @@ export const experiences: ExperienceItem[] = [
       ar: "مطور أساسي ومهندس تحسين الأداء",
     },
     company: {
-      en: "RoyalMed Medical Platform",
-      ar: "منصة رويال ميد التعليمية الطبية",
+      en: "RoyalMed Medical Academy",
+      ar: "منصة رويال ميد الأكاديمية الطبية",
     },
     location: {
       en: "Contract / Remote",
@@ -137,12 +166,12 @@ export const experiences: ExperienceItem[] = [
     },
     type: "Contract",
     badge: {
-      en: "EdTech & Performance",
+      en: "Medical EdTech",
       ar: "تعليم طبي وتحسين أداء",
     },
     description: {
-      en: "Delivered interactive medical lecture modules for medical university students and optimized overall platform web performance.",
-      ar: "تطوير وحدات المحاضرات الطبية التفاعلية لطلاب كليات الطب وإعادة هيكلة تحسين سرعة وأداء المنصة.",
+      en: "Delivered interactive medical lecture modules for medical students, engineered custom video playback with assessment checkpoints, and optimized website loading speeds by up to 40%.",
+      ar: "تطوير وحدات المحاضرات التفاعلية لطلاب كليات الطب، ومشغل الفيديو المخصص مع محطات اختبار مرحلية، وتسريع تحميل صفحات المنصة بنسبة 40% عبر استراتيجيات التخزين والتحميل الكسول.",
     },
     achievements: {
       en: [
@@ -157,16 +186,22 @@ export const experiences: ExperienceItem[] = [
       ],
     },
     technologies: ["React.js", "Node.js", "MongoDB", "Tailwind CSS", "REST APIs"],
+    image: "/assets/experience-showcase.jpg",
+    caseStudyId: "royalmed",
+    highlightMetric: {
+      en: "⚡ +40% Speed Boost • WCAG Compliant • Interactive Exam Checkpoints",
+      ar: "⚡ تسريع تحميل بنسبة 40% • متوافق مع معايير WCAG • اختبارات طبية تفاعلية",
+    },
   },
   {
     id: "web-masters",
     role: {
       en: "Frontend Developer Intern",
-      ar: "متدرب تطوير واجهات أمامية",
+      ar: "متدرب تطوير واجهات أمامية (React)",
     },
     company: {
       en: "Web Masters",
-      ar: "ويب ماسترز (Web Masters)",
+      ar: "شركة ويب ماسترز (Web Masters)",
     },
     location: {
       en: "Egypt (Accredited)",
@@ -182,8 +217,8 @@ export const experiences: ExperienceItem[] = [
       ar: "عمل مؤسسي و Agile",
     },
     description: {
-      en: "Completed official accredited internship developing client-facing applications using modern React workflows and engineering collaboration practices.",
-      ar: "إتمام برنامج تدريب رسمي معتمد لبناء تطبيقات واجهات أمامية للعملاء وفق أحدث معايير React وممارسات العمل الجماعي الاحترافية.",
+      en: "Completed accredited corporate internship developing client-facing applications using modern React workflows, Figma design tokens, pixel-perfect responsive layouts, and rigorous code reviews.",
+      ar: "إتمام برنامج تدريب رسمي معتمد لبناء تطبيقات واجهات أمامية للعملاء وفق أحدث معايير React، مع تحويل تصاميم Figma بدقة بكسل كاملة، والمشاركة اليومية في دورات Agile ومراجعات الكود الصارمة.",
     },
     achievements: {
       en: [
@@ -198,6 +233,11 @@ export const experiences: ExperienceItem[] = [
       ],
     },
     technologies: ["React.js", "JavaScript (ES6+)", "Tailwind CSS", "Git", "Figma", "Agile/Scrum"],
+    image: "/assets/experience-showcase.jpg",
+    highlightMetric: {
+      en: "⚡ Daily Agile Sprints • Strict PR Code Reviews • Pixel-Perfect Figma Execution",
+      ar: "⚡ دورات Agile يومية • مراجعات كود صارمة (PRs) • دقة بكسل كاملة من Figma",
+    },
   },
   {
     id: "freelance-wordpress",
@@ -206,8 +246,8 @@ export const experiences: ExperienceItem[] = [
       ar: "مطور برمجيات حر ومتخصص ووردبريس",
     },
     company: {
-      en: "Independent Freelance & Agency Clients",
-      ar: "مشاريع مستقلة وعملاء تجاريين",
+      en: "Freelance & Agency Clients (Skyscrapers)",
+      ar: "مشاريع مستقلة — بوابة سكاي سكريبرز العقارية",
     },
     location: {
       en: "Remote",
@@ -219,12 +259,12 @@ export const experiences: ExperienceItem[] = [
     },
     type: "Freelance",
     badge: {
-      en: "Client Delivery & WordPress",
+      en: "Client Delivery",
       ar: "مشاريع عملاء وووردبريس",
     },
     description: {
-      en: "Delivered bespoke commercial websites, custom WordPress themes, PHP logic, and high-converting landing pages for businesses and agencies.",
-      ar: "تطوير مواقع تجارية مخصصة وقوالب ووردبريس فريدة بلغة PHP وصفحات هبوط لتحويل واستقطاب العملاء لشركات ومؤسسات مختلفة.",
+      en: "Delivered bespoke commercial websites, custom WordPress themes, PHP logic, and high-converting lead funnels for real estate and business agencies (e.g., Skyscrapers Real Estate Portal).",
+      ar: "تطوير مواقع تجارية مخصصة وقوالب ووردبريس فريدة بلغة PHP وهيكلة بيانات فريدة (Custom Post Types) مع استقبال طلبات المعاينة فورياً عبر الواتساب والبريد وسرعة تحميل فائقة على كافة الشاشات.",
     },
     achievements: {
       en: [
@@ -239,6 +279,12 @@ export const experiences: ExperienceItem[] = [
       ],
     },
     technologies: ["WordPress", "PHP", "Elementor", "Custom Themes", "JavaScript", "Tailwind CSS", "MySQL"],
+    image: "/assets/experience-showcase.jpg",
+    caseStudyId: "skyscrapers",
+    highlightMetric: {
+      en: "⚡ Sub-second First Paint • Bespoke CPT Schema • Automated WhatsApp Leads",
+      ar: "⚡ سرعة تحميل أولية فائقة • هيكلة بيانات مخصصة (CPTs) • قمع تحويل فوري للواتساب",
+    },
   },
   {
     id: "mechatronics-degree",
@@ -264,8 +310,8 @@ export const experiences: ExperienceItem[] = [
       ar: "انضباط وعقلية هندسية",
     },
     description: {
-      en: "Pursuing rigorous engineering education combining mechanical systems, electronics, control algorithms, and computer systems.",
-      ar: "دراسة هندسية متقدمة تدمج بين الأنظمة الميكانيكية، الدوائر الإلكترونية، خوارزميات التحكم الآلي، ونظم الحواسيب.",
+      en: "Rigorous mechatronics engineering education combining system dynamics, electronics, control algorithms, and mathematical logic with scalable software architecture.",
+      ar: "دراسة هندسية متقدمة تدمج بين الأنظمة الميكانيكية، الدوائر الإلكترونية، خوارزميات التحكم الآلي، ونظم الحواسيب، وتوظيف التفكير المنطقي والفيزيائي في بناء معماريات البرمجيات المعقدة.",
     },
     achievements: {
       en: [
@@ -278,5 +324,10 @@ export const experiences: ExperienceItem[] = [
       ],
     },
     technologies: ["Control Systems", "Embedded Systems", "System Modeling", "Physics & Mathematics"],
+    image: "/assets/experience-showcase.jpg",
+    highlightMetric: {
+      en: "⚡ Control Algorithms • Embedded Hardware + Code • Diploma Honors",
+      ar: "⚡ خوارزميات تحكم • أنظمة مدمجة وبرمجة عتاد • مرتبة الشرف في المعادلة الهندسية",
+    },
   },
 ];

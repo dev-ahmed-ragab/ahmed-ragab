@@ -135,6 +135,9 @@ export function SubspaceCommsDeck({
         <img
           src={astronautAssetSrc}
           alt="Ahmed Ragab Receiving Subspace Transmission in Spaceship Cockpit"
+          loading="lazy"
+          decoding="async"
+          fetchPriority="low"
           className="w-full h-full object-cover object-center filter contrast-[1.05] brightness-95 group-hover:scale-105 transition-transform duration-700 ease-out"
         />
 

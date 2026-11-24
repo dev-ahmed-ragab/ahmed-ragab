@@ -392,8 +392,8 @@ export const projects: Project[] = [
       ar: "متجر وقائمة تفاعلية لعرض قوائم الحلويات بنظام إحالة للعملاء، وسلة تسوق سريعة، ولوحة إدارة للطلبات الواردة.",
     },
     metrics: { en: ["Interactive Cart", "Referral Engine", "Sub-100ms UI Updates"], ar: ["سلة طلبات تفاعلية", "نظام مكافآت وإحالة", "استجابة واجهة فورية"] },
-    stack: ["React.js", "Node.js", "MongoDB", "Tailwind CSS"],
-    category: "MERN Stack",
+    stack: ["Vanilla JS (SPA)", "Tailwind CSS", "Node.js", "Express", "MongoDB"],
+    category: "Full-Stack",
     links: { github: "https://github.com/dev-ahmed-ragab/b-Labn" },
     githubNotice: {
       en: "Public Open-Source Frontend & Backend Repository",
