@@ -18,6 +18,7 @@ export interface Project {
     ar: string[];
   };
   stack: string[];
+  image?: string;
   category: "Full-Stack" | "Enterprise SaaS" | "Frontend & Tools" | "MERN Stack" | "WordPress";
   links: {
     demo?: string;
@@ -349,6 +350,34 @@ export const projects: Project[] = [
     pinned: false,
     featuredYear: "2024",
     highlights: { en: ["Admin moderation tools"], ar: ["أدوات إشراف وتحكم إداري"] },
+    caseStudy: {
+      overview: {
+        en: "Full-Stack MERN publishing engine equipped with JWT role authorization, tag taxonomy, and an administrative moderation panel.",
+        ar: "منصة تدوين متكاملة بمكدس MERN بنظام صلاحيات JWT وتصنيف للمقالات ولوحة تحكم إدارية.",
+      },
+      problem: {
+        en: "Content authors needed a zero-friction publishing workflow with secure role moderation, instant tag indexing, and resilient image hosting.",
+        ar: "احتاج صُنّاع المحتوى إلى بيئة نشر مرنة مع إدارة محكمة لصلاحيات المحررين والمشرفين وحفظ آمن للوسائط.",
+      },
+      solution: {
+        en: "Engineered a decoupled REST API with Express.js & MongoDB, utilizing schema indexing for sub-50ms article search and stateless JWT auth.",
+        ar: "بناء واجهة REST API متكاملة بـ Express و MongoDB، مع فهارس استعلامات سريعة جداً للمقالات ومصادقة مستخدمين آمنة بـ JWT.",
+      },
+      architecture: {
+        en: [
+          "Stateless JWT authorization with HTTP-only secure session cookies.",
+          "Indexed MongoDB compound queries for instant tag and category aggregation.",
+          "Decoupled React client utilizing custom hooks for optimistic comment submission.",
+        ],
+        ar: [
+          "نظام مصادقة مشفر بـ JWT مع حماية الكوكيز من هجمات XSS.",
+          "فهارس استعلام مركبة في MongoDB لتجميع الوسوم والتصنيفات في أجزاء من الثانية.",
+          "واجهة React تفاعلية مع تحديثات فورية متفائلة عند التعليق والنشر.",
+        ],
+      },
+      mockupGradient: "bg-gradient-to-br from-space-900 via-space-950 to-nebula-violet/25",
+      mockupBadge: "MERN Stack Publishing",
+    },
   },
   {
     id: "b-labn",
@@ -421,6 +450,34 @@ export const projects: Project[] = [
     pinned: false,
     featuredYear: "2024",
     highlights: { en: ["Video playback & channel inspection"], ar: ["تشغيل الفيديو وتصفح القنوات"] },
+    caseStudy: {
+      overview: {
+        en: "Rapid video search and playback streaming interface consuming YouTube Data v3 API with custom hook caching and infinite browsing.",
+        ar: "تطبيق بث وتصفح فيديو فائق السرعة يعتمد على واجهة YouTube Data API مع كاش مخصص واستعراض لانهائي.",
+      },
+      problem: {
+        en: "Third-party video APIs enforce strict rate limits and introduce network latency without proper client-side caching.",
+        ar: "واجهات API الخارجية للفيديو تفرض قيوداً على عدد الطلبات وتسبب بطئاً ملحوظاً في التصفح عند تكرار استدعائها.",
+      },
+      solution: {
+        en: "Developed custom caching hooks that memoize API responses, eliminating duplicate requests and providing instant channel/video playback switching.",
+        ar: "تطوير Custom Hooks ذكية لتخزين استجابات الـ API مؤقتاً، مما منع تكرار الطلبات وسرّع التنقل بين القنوات والفيديوهات.",
+      },
+      architecture: {
+        en: [
+          "Custom React hook caching layer with LRU eviction preventing redundant API calls.",
+          "Mobile-responsive video player viewport with seamless picture-in-picture mode.",
+          "Lazy-loaded video thumbnails reducing initial page bundle payload by 40%.",
+        ],
+        ar: [
+          "طبقة كاش مخصصة بالـ Hooks تمنع إهدار رصيد الـ API وتسرع الاستجابة.",
+          "مشغل فيديو متجاوب بالكامل يدعم نمط العرض المصغر والتصفح السلس.",
+          "تحميل كسول (Lazy Loading) للصور المصغرة لتقليص حجم الصفحة بنسبة 40%.",
+        ],
+      },
+      mockupGradient: "bg-gradient-to-br from-space-900 via-space-950 to-nebula-cyan/25",
+      mockupBadge: "React Video Engine",
+    },
   },
   {
     id: "fitness-app",
@@ -441,6 +498,34 @@ export const projects: Project[] = [
     pinned: false,
     featuredYear: "2024",
     highlights: { en: ["Comprehensive workout filtering"], ar: ["فلترة التمارين بدقة"] },
+    caseStudy: {
+      overview: {
+        en: "Interactive fitness catalog and workout guide featuring muscle-group indexing, animated exercise demos, and an integrated BMI calculator.",
+        ar: "دليل تمارين تفاعلي مصنف حسب العضلات مع فيديوهات توضيحية وحاسبة مؤشر كتلة الجسم الحية.",
+      },
+      problem: {
+        en: "Gym enthusiasts struggle to navigate unstructured exercise databases and correlate workout plans with personal body metrics.",
+        ar: "صعوبة تصفح قواعد بيانات التمارين الضخمة وافتقار المستخدمين لأداة تربط بين خطط التمارين ومقاييس الجسم الشخصية.",
+      },
+      solution: {
+        en: "Created a fast indexed search catalog powered by ExerciseDB API with local state filtering, YouTube exercise demonstrations, and live BMI analytics.",
+        ar: "بناء فهرس بحث سريع ومفلتر باستخدام ExerciseDB API، مع ربط مقاطع يوتيوب إرشادية وتضمين حاسبة كتلة الجسم (BMI).",
+      },
+      architecture: {
+        en: [
+          "Multi-parameter search filtering across 1,000+ exercises by muscle, equipment, and difficulty.",
+          "Integrated BMI calculator providing instant algorithmic training tier recommendations.",
+          "Optimized asset rendering with skeleton loaders for smooth UX across all devices.",
+        ],
+        ar: [
+          "فلترة متعددة المعايير لأكثر من 1000 تمرين حسب العضلة والمعدة الرياضية ومستوى الصعوبة.",
+          "حاسبة كتلة جسم مدمجة تقدم توصيات فورية لنوع التدريب المناسب.",
+          "واجهات تفاعلية بهياكل تحميل Skeleton لتجربة تصفح انسيابية وسريعة.",
+        ],
+      },
+      mockupGradient: "bg-gradient-to-br from-space-900 via-space-950 to-nebula-violet/25",
+      mockupBadge: "Interactive Fitness Guide",
+    },
   },
   {
     id: "skyscrapers",
@@ -513,5 +598,33 @@ export const projects: Project[] = [
     pinned: false,
     featuredYear: "2024",
     highlights: { en: ["Fast booking inquiries"], ar: ["استقبال استفسارات الحجز"] },
+    caseStudy: {
+      overview: {
+        en: "Bilingual tourism web portal showcasing international holiday packages with dynamic itinerary galleries and instant booking inquiry channels.",
+        ar: "بوابة سياحة وسفر ثنائية اللغة لعرض باقات العطلات الدولية وجداول الرحلات اليومية واستقبال الحجوزات.",
+      },
+      problem: {
+        en: "Travel customers required an engaging visual itinerary breakdown with instant WhatsApp inquiry triggers and smooth bilingual language toggling.",
+        ar: "احتاج العملاء لاستعراض برامج الرحلات خطوة بخطوة مع إمكانية التواصل الفوري عبر الواتساب والتحويل السلس بين اللغتين.",
+      },
+      solution: {
+        en: "Built a customized responsive portal featuring dynamic itinerary schedules, optimized photo galleries, and direct webhook lead dispatch.",
+        ar: "تطوير بوابة سياحية مخصصة بجداول رحلات تفاعلية ومعارض صور سريعة التحميل مع ربط إرسال الاستفسارات للواتساب.",
+      },
+      architecture: {
+        en: [
+          "Bilingual schema architecture with seamless RTL/LTR layout mirroring.",
+          "Interactive visual itinerary timeline with day-by-day activity maps.",
+          "Direct click-to-WhatsApp and email lead triggers for high conversion rates.",
+        ],
+        ar: [
+          "هيكلة ثنائية اللغة متوافقة تماماً مع الاتجاهين RTL و LTR.",
+          "خط زمني تفاعلي لعرض جدول أنشطة الرحلة يوماً بيوم.",
+          "أزرار حجز سريعة تنقل العميل مباشرة للواتساب والبريد لرفع معدل التحويل.",
+        ],
+      },
+      mockupGradient: "bg-gradient-to-br from-space-900 via-space-950 to-nebula-emerald/25",
+      mockupBadge: "Tourism & Itinerary Portal",
+    },
   },
 ];

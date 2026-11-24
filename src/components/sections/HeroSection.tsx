@@ -10,13 +10,13 @@ export function HeroSection() {
   const t = useTranslations("hero");
 
   return (
-    <section className="relative min-h-[92vh] flex items-center justify-center pt-24 sm:pt-32 pb-16 px-4 sm:px-6 lg:px-8 w-full overflow-visible">
+    <section id="hero" className="relative min-h-screen min-h-[100dvh] flex items-center justify-center pt-28 sm:pt-36 pb-20 sm:pb-24 px-4 sm:px-6 lg:px-8 w-full overflow-hidden">
       {/* Expansive cosmic ambient nebula glows */}
-      <div className="absolute top-1/4 start-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] sm:w-[580px] h-[350px] sm:h-[580px] bg-nebula-indigo/15 rounded-full blur-[130px] sm:blur-[160px] pointer-events-none" />
-      <div className="absolute bottom-10 end-10 w-[260px] sm:w-[420px] h-[260px] sm:h-[420px] bg-nebula-cyan/12 rounded-full blur-[110px] sm:blur-[140px] pointer-events-none" />
-      <div className="absolute top-1/3 -start-20 w-[300px] h-[300px] bg-nebula-violet/10 rounded-full blur-[130px] pointer-events-none" />
+      <div className="absolute top-1/4 start-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] sm:w-[580px] h-[280px] sm:h-[580px] bg-nebula-indigo/15 rounded-full blur-[100px] sm:blur-[160px] pointer-events-none" />
+      <div className="absolute bottom-10 end-4 sm:end-10 w-[220px] sm:w-[420px] h-[220px] sm:h-[420px] bg-nebula-cyan/12 rounded-full blur-[90px] sm:blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/3 -start-10 sm:-start-20 w-[240px] sm:w-[300px] h-[240px] sm:h-[300px] bg-nebula-violet/10 rounded-full blur-[100px] sm:blur-[130px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto w-full relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+      <div className="max-w-7xl mx-auto w-full relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
         {/* Left Column: Headlines & Actions */}
         <div className="lg:col-span-7 flex flex-col items-start space-y-6 text-start w-full">
           {/* Status Badge */}
@@ -35,7 +35,7 @@ export function HeroSection() {
             <span className="text-xs sm:text-sm uppercase font-mono tracking-widest text-nebula-cyan font-bold block">
               {t("tagline")}
             </span>
-            <h1 className="text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.14] break-words">
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight sm:leading-[1.14] break-words">
               {t("headline")}
             </h1>
           </div>
@@ -73,7 +73,7 @@ export function HeroSection() {
 
           {/* Engineering Snapshot Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-6 w-full max-w-xl border-t border-white/10">
-            <div className="p-3.5 rounded-xl border border-white/10 bg-white/[0.03] backdrop-blur-sm flex sm:flex-col justify-between sm:justify-start items-center sm:items-start gap-1">
+            <div className="p-3.5 rounded-xl border border-white/10 bg-white/[0.03] backdrop-blur-sm flex justify-between sm:flex-col sm:justify-start items-center sm:items-start gap-1">
               <div className="flex items-center gap-1.5 text-xs text-nebula-cyan font-mono">
                 <Terminal className="w-3.5 h-3.5 shrink-0" />
                 <span>Experience</span>
@@ -83,7 +83,7 @@ export function HeroSection() {
               </div>
             </div>
 
-            <div className="p-3.5 rounded-xl border border-white/10 bg-white/[0.03] backdrop-blur-sm flex sm:flex-col justify-between sm:justify-start items-center sm:items-start gap-1">
+            <div className="p-3.5 rounded-xl border border-white/10 bg-white/[0.03] backdrop-blur-sm flex justify-between sm:flex-col sm:justify-start items-center sm:items-start gap-1">
               <div className="flex items-center gap-1.5 text-xs text-nebula-violet font-mono">
                 <Layers className="w-3.5 h-3.5 shrink-0" />
                 <span>Specialty</span>
@@ -93,7 +93,7 @@ export function HeroSection() {
               </div>
             </div>
 
-            <div className="p-3.5 rounded-xl border border-white/10 bg-white/[0.03] backdrop-blur-sm flex sm:flex-col justify-between sm:justify-start items-center sm:items-start gap-1">
+            <div className="p-3.5 rounded-xl border border-white/10 bg-white/[0.03] backdrop-blur-sm flex justify-between sm:flex-col sm:justify-start items-center sm:items-start gap-1">
               <div className="flex items-center gap-1.5 text-xs text-nebula-emerald font-mono">
                 <Cpu className="w-3.5 h-3.5 shrink-0" />
                 <span>Discipline</span>
@@ -107,20 +107,20 @@ export function HeroSection() {
 
         {/* Right Column: Free-Floating Astronaut & Celestial Space Scene */}
         {/* Absolutely NO square frame, NO solid box, NO container clipping */}
-        <div className="lg:col-span-5 relative flex flex-col items-center justify-center overflow-visible min-h-[360px] sm:min-h-[460px] lg:min-h-[520px]">
+        <div className="lg:col-span-5 relative flex flex-col items-center justify-center overflow-visible min-h-[320px] sm:min-h-[440px] lg:min-h-[500px]">
           {/* Subtle concentric celestial orbital traces in space background */}
-          <div className="absolute w-[300px] sm:w-[460px] h-[300px] sm:h-[460px] rounded-full border border-nebula-indigo/15 animate-spin-slow pointer-events-none" />
-          <div className="absolute w-[400px] sm:w-[560px] h-[400px] sm:h-[560px] rounded-full border border-nebula-cyan/10 pointer-events-none" />
+          <div className="absolute w-[240px] sm:w-[420px] h-[240px] sm:h-[420px] rounded-full border border-nebula-indigo/15 animate-spin-slow pointer-events-none" />
+          <div className="absolute w-[290px] sm:w-[500px] h-[290px] sm:h-[500px] rounded-full border border-nebula-cyan/10 pointer-events-none" />
 
           {/* Flat Vector Saturn-Like Ringed Planet floating in background */}
-          <div className="absolute -top-6 end-0 sm:-top-12 sm:-end-6 z-0 opacity-80 sm:opacity-90 pointer-events-none">
-            <RingedPlanet size={180} variant="violet" tilt={-22} />
+          <div className="absolute -top-4 end-0 sm:-top-12 sm:-end-6 z-0 opacity-80 sm:opacity-90 pointer-events-none">
+            <RingedPlanet size={140} variant="violet" tilt={-22} />
           </div>
 
           {/* Clean Lottie Communication Satellite Probe beaming telemetry signals */}
           <div className="absolute top-1 start-0 sm:top-4 sm:-start-8 z-20 pointer-events-none">
             <LottieSatellite
-              size={115}
+              size={95}
               direction="right"
               speed={0.8}
               showPings={true}
@@ -132,7 +132,7 @@ export function HeroSection() {
             Unboxed, looking upwards towards the stars, floating with zero-g physics 
           */}
           <div className="relative z-10 w-full flex justify-center items-center">
-            <FloatingAstronaut />
+            <FloatingAstronaut size={420} />
           </div>
 
           {/* Floating Subtle Telemetry Tag (Floating freely below, NOT boxing the astronaut) */}

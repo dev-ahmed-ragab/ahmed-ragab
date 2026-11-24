@@ -1,5 +1,17 @@
 export const siteConfig = {
   name: "Ahmed Ragab",
+  fullName: {
+    en: "Ahmed Ragab Abdelkareem",
+    ar: "أحمد رجب عبد الكريم",
+  },
+  role: {
+    en: "Full-Stack Product Engineer & Technical Founder",
+    ar: "مهندس منتجات برمجية ومؤسس تقني",
+  },
+  education: {
+    en: "Mechatronics Engineering — Menoufia University (2023 – 2028)",
+    ar: "بكالوريوس هندسة ميكاترونكس — كلية الهندسة، جامعة المنوفية (2023 – 2028)",
+  },
   title: {
     en: "Ahmed Ragab — Full-Stack Product Engineer & Technical Founder",
     ar: "أحمد رجب — مهندس منتجات برمجية ومؤسس تقني",
@@ -9,6 +21,7 @@ export const siteConfig = {
     ar: "مهندس منتجات برمجية متخصص في بناء أنظمة سحابية قابلة للتوسع وتطبيقات ويب فائقة الأداء باستخدام Next.js و TypeScript وأحدث معايير الويب.",
   },
   url: "https://ahmedragab.vercel.app",
+  ogImage: "https://ahmedragab.vercel.app/assets/astronaut.jpg",
   email: "ahmedragab.pro@outlook.com",
   phone: "(+20) 01096097617",
   location: {
@@ -26,6 +39,47 @@ export const siteConfig = {
     github: "https://github.com/dev-ahmed-ragab",
     linkedin: "https://www.linkedin.com/in/ahmed-ragab-pro/",
     iqraa: "https://iqraa.live",
-    cv: "https://drive.google.com/file/d/1yWlV4hC1RjE9V6hS2sXqB3nM7/view", // Default direct drive/download link
+    cv: "/assets/Ahmed_Ragab_CV.pdf",
+  },
+  socials: {
+    githubUsername: "dev-ahmed-ragab",
+    linkedinUsername: "ahmed-ragab-pro",
+    twitterHandle: "@dev_ahmed_ragab",
+  },
+  keywords: {
+    en: [
+      "Ahmed Ragab",
+      "Ahmed Ragab Abdelkareem",
+      "Full-Stack Product Engineer",
+      "Product Engineer",
+      "Technical Founder",
+      "Next.js Developer",
+      "React Developer",
+      "TypeScript",
+      "Tailwind CSS",
+      "Supabase",
+      "PostgreSQL",
+      "Mechatronics Engineer",
+      "Iqraa AI",
+      "Software Engineer Cairo Egypt",
+      "Remote Full-Stack Engineer",
+      "Frontend Architect",
+      "High-Performance Web Apps",
+    ],
+    ar: [
+      "أحمد رجب",
+      "أحمد رجب عبد الكريم",
+      "مهندس منتجات برمجية",
+      "مؤسس تقني",
+      "مهندس برمجيات",
+      "مطور Next.js",
+      "مطور React",
+      "تايب سكريبت",
+      "مهندس ميكاترونكس",
+      "منصة إقرأ للذكاء الاصطناعي",
+      "مطور فول ستاك مصر",
+      "مبرمج ويب القاهرة",
+      "تطبيقات سحابية",
+    ],
   },
 };

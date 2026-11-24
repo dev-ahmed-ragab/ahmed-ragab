@@ -116,18 +116,18 @@ export function Navbar() {
             {/* Logo / Brand */}
             <Link
               href="/"
-              className="flex items-center gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-nebula-violet rounded-lg"
+              className="flex items-center gap-2.5 sm:gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-nebula-violet rounded-lg min-w-0"
             >
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-nebula-indigo to-nebula-violet flex items-center justify-center font-bold text-white shadow-lg shadow-nebula-indigo/30 group-hover:scale-105 transition-transform">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-nebula-indigo to-nebula-violet flex items-center justify-center font-bold text-white shadow-lg shadow-nebula-indigo/30 group-hover:scale-105 transition-transform shrink-0 text-sm sm:text-base">
                 AR
               </div>
-              <div className="flex flex-col">
-                <span className="text-base font-bold tracking-tight text-white group-hover:text-nebula-cyan transition-colors">
+              <div className="flex flex-col min-w-0">
+                <span className="text-sm sm:text-base font-bold tracking-tight text-white group-hover:text-nebula-cyan transition-colors truncate">
                   Ahmed Ragab
                 </span>
-                <span className="text-[11px] text-slate-400 font-mono flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-nebula-emerald animate-pulse"></span>
-                  Product Engineer
+                <span className="text-[10px] sm:text-[11px] text-slate-400 font-mono flex items-center gap-1.5 truncate">
+                  <span className="w-1.5 h-1.5 rounded-full bg-nebula-emerald animate-pulse shrink-0"></span>
+                  <span className="truncate">Product Engineer</span>
                 </span>
               </div>
             </Link>
@@ -182,14 +182,14 @@ export function Navbar() {
             </div>
 
             {/* Mobile Action Controls (Touch Friendly >= 44px) */}
-            <div className="flex md:hidden items-center gap-2">
+            <div className="flex md:hidden items-center gap-2 shrink-0">
               {/* Quick Language Switcher Button (44px min touch target) */}
               <button
                 onClick={toggleLocale}
-                className="min-w-[44px] min-h-[44px] flex items-center justify-center gap-1 px-3 text-slate-200 border border-white/10 rounded-xl bg-white/5 hover:bg-white/10 hover:border-nebula-cyan/40 active:scale-95 transition-all"
+                className="min-w-[44px] min-h-[44px] px-3 flex items-center justify-center gap-1.5 text-slate-200 border border-white/10 rounded-xl bg-white/5 hover:bg-white/10 hover:border-nebula-cyan/40 active:scale-95 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-nebula-cyan"
                 aria-label={isArabic ? "Switch to English" : "التبديل إلى العربية"}
               >
-                <Globe className="w-4 h-4 text-nebula-cyan" />
+                <Globe className="w-4 h-4 text-nebula-cyan shrink-0" />
                 <span className="text-xs font-mono font-bold">
                   {locale === "en" ? "AR" : "EN"}
                 </span>
@@ -198,7 +198,7 @@ export function Navbar() {
               {/* Mobile Drawer Trigger (44px min touch target) */}
               <button
                 onClick={() => setMobileMenuOpen(true)}
-                className="min-w-[44px] min-h-[44px] flex items-center justify-center text-slate-200 border border-white/10 rounded-xl bg-white/5 hover:bg-white/10 hover:border-nebula-cyan/40 active:scale-95 transition-all"
+                className="min-w-[44px] min-h-[44px] flex items-center justify-center text-slate-200 border border-white/10 rounded-xl bg-white/5 hover:bg-white/10 hover:border-nebula-cyan/40 active:scale-95 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-nebula-cyan"
                 aria-label="Open mobile navigation menu"
                 aria-expanded={mobileMenuOpen}
               >
@@ -230,7 +230,7 @@ export function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: isArabic ? "-100%" : "100%" }}
               transition={{ type: "spring", damping: 28, stiffness: 260 }}
-              className="relative w-full max-w-[340px] xs:max-w-[380px] h-full bg-space-950/98 border-s border-white/10 shadow-2xl flex flex-col justify-between overflow-y-auto overscroll-contain z-10"
+              className="relative w-[86vw] max-w-[340px] h-full bg-space-950/98 border-s border-white/10 shadow-2xl flex flex-col justify-between overflow-y-auto overscroll-contain z-10"
               role="dialog"
               aria-modal="true"
               aria-label="Mobile Navigation Drawer"
@@ -360,7 +360,7 @@ export function Navbar() {
                             </div>
                           </div>
                         </div>
-                        <ChevronRight className="w-4 h-4 text-slate-500 group-hover:text-nebula-cyan group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-all" />
+                        <ChevronRight className="w-4 h-4 text-slate-500 group-hover:text-nebula-cyan group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1 transition-all shrink-0" />
                       </a>
                     );
                   })}

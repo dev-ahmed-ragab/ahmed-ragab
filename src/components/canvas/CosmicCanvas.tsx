@@ -62,7 +62,9 @@ export function CosmicCanvas({ className = "" }: CosmicCanvasProps) {
     let height = window.innerHeight;
     let scrollY = window.scrollY;
 
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const isMobile = width < 768;
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const dpr = Math.min(window.devicePixelRatio || 1, isMobile ? 1.25 : 2);
 
     const setupCanvas = () => {
       width = window.innerWidth;
@@ -76,8 +78,10 @@ export function CosmicCanvas({ className = "" }: CosmicCanvasProps) {
 
     setupCanvas();
 
-    // 1. Distant Micro Stars (Subtle twinkling deep field)
-    const distantCount = Math.min(160, Math.floor(width / 9));
+    // 1. Distant Micro Stars (Subtle twinkling deep field - tuned for mobile performance)
+    const distantCount = isMobile
+      ? Math.min(75, Math.floor(width / 16))
+      : Math.min(160, Math.floor(width / 9));
     const distantStars: Star[] = Array.from({ length: distantCount }, () => {
       const baseX = Math.random() * width;
       const baseY = Math.random() * height;
@@ -103,7 +107,9 @@ export function CosmicCanvas({ className = "" }: CosmicCanvasProps) {
     });
 
     // 2. Mid-Field Luminous Stars (Vibrant chromatic cosmic beacons)
-    const luminousCount = Math.min(45, Math.floor(width / 32));
+    const luminousCount = isMobile
+      ? Math.min(18, Math.floor(width / 50))
+      : Math.min(45, Math.floor(width / 32));
     const starColors = [
       "139, 92, 246", // Violet
       "6, 182, 212",  // Cyan
@@ -131,7 +137,9 @@ export function CosmicCanvas({ className = "" }: CosmicCanvasProps) {
     });
 
     // 3. Drifting Cosmic Dust Motes (Floating ambient stardust)
-    const dustCount = Math.min(30, Math.floor(width / 45));
+    const dustCount = isMobile
+      ? Math.min(10, Math.floor(width / 70))
+      : Math.min(30, Math.floor(width / 45));
     const dustParticles: DriftingDust[] = Array.from({ length: dustCount }, () => ({
       x: Math.random() * width,
       y: Math.random() * height,
@@ -311,7 +319,9 @@ export function CosmicCanvas({ className = "" }: CosmicCanvasProps) {
         ctx.fill();
       }
 
-      animationFrameId = requestAnimationFrame(render);
+      if (!prefersReducedMotion) {
+        animationFrameId = requestAnimationFrame(render);
+      }
     };
 
     render();
@@ -328,7 +338,7 @@ export function CosmicCanvas({ className = "" }: CosmicCanvasProps) {
   return (
     <canvas
       ref={canvasRef}
-      className={`fixed inset-0 pointer-events-none z-0 ${className}`}
+      className={`fixed inset-0 pointer-events-none z-0 w-full h-full max-w-full overflow-hidden ${className}`}
       aria-hidden="true"
     />
   );

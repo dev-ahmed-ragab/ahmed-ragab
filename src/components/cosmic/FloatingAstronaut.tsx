@@ -1,9 +1,8 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { motion, useScroll, useTransform, useSpring, AnimatePresence } from "framer-motion";
-import { LottiePlayer } from "./LottiePlayer";
-import { Sparkles, Move } from "lucide-react";
+import { useRef, useState, useEffect } from "react";
+import { motion, useScroll, useTransform, useSpring, useReducedMotion } from "framer-motion";
+import { TransparentCosmicVideo } from "./TransparentCosmicVideo";
 
 interface FloatingAstronautProps {
   className?: string;
@@ -16,8 +15,17 @@ export function FloatingAstronaut({
   size = 460,
 }: FloatingAstronautProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const [isHovered, setIsHovered] = useState(false);
-  const [isDragging, setIsDragging] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const shouldReduceMotion = useReducedMotion();
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile, { passive: true });
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   // Global window scroll physics
   const { scrollYProgress } = useScroll();
@@ -30,15 +38,32 @@ export function FloatingAstronaut({
   });
 
   // Scroll-linked trajectory transforms:
-  // As the user travels down the cosmic page, the astronaut gently drifts and tilts
-  const scrollYOffset = useTransform(smoothScroll, [0, 0.35, 0.7, 1], [0, 100, 220, 360]);
-  const scrollXOffset = useTransform(smoothScroll, [0, 0.25, 0.6, 1], [0, -28, 20, -10]);
-  const scrollRotate = useTransform(smoothScroll, [0, 0.25, 0.6, 1], [-3, 5, -5, 2]);
+  // Kept within HeroSection boundaries so the astronaut never bleeds or hangs into subsequent sections
+  const scrollYOffset = useTransform(
+    smoothScroll,
+    [0, 0.15, 0.3],
+    shouldReduceMotion ? [0, 0, 0] : isMobile ? [0, 15, 30] : [0, 25, 45]
+  );
+  const scrollXOffset = useTransform(
+    smoothScroll,
+    [0, 0.15, 0.3],
+    shouldReduceMotion || isMobile ? [0, 0, 0] : [0, -10, 5]
+  );
+  const scrollRotate = useTransform(
+    smoothScroll,
+    [0, 0.15, 0.3],
+    shouldReduceMotion ? [0, 0, 0] : [-1, 1.5, 0]
+  );
+  const astronautOpacity = useTransform(
+    smoothScroll,
+    [0, 0.12, 0.22],
+    [1, 0.85, 0]
+  );
 
   return (
     <div
       ref={containerRef}
-      className={`relative select-none flex items-center justify-center ${className}`}
+      className={`relative select-none flex items-center justify-center max-w-full overflow-visible ${className}`}
     >
       {/* 
         Layer 1: Scroll Physics Wrapper (Smooth scroll-linked zero-g travel)
@@ -48,20 +73,21 @@ export function FloatingAstronaut({
           y: scrollYOffset,
           x: scrollXOffset,
           rotate: scrollRotate,
+          opacity: astronautOpacity,
         }}
-        className="relative flex items-center justify-center will-change-transform"
+        className="relative flex items-center justify-center will-change-transform max-w-full"
       >
         {/*
-          Layer 2: Organic Idle Zero-G Swimming Motion
-          Subtle yaw/pitch bobbing, breathing zero-gravity feel
+          Layer 2: Organic Idle Zero-G Floating Motion
+          Subtle yaw/pitch bobbing, breathing zero-gravity feel (Fixed in place, non-draggable)
         */}
         <motion.div
           animate={
-            isDragging
+            shouldReduceMotion
               ? { y: 0, rotate: 0 }
               : {
-                  y: [-10, 12, -10],
-                  rotate: [-2, 3, -2],
+                  y: [-8, 10, -8],
+                  rotate: [-1.2, 1.8, -1.2],
                 }
           }
           transition={{
@@ -76,16 +102,14 @@ export function FloatingAstronaut({
               ease: "easeInOut",
             },
           }}
-          className="relative will-change-transform flex items-center justify-center"
+          className="relative will-change-transform flex items-center justify-center max-w-full"
         >
           {/* 
             Backlight: Ethereal Cosmic Glow behind silhouette 
             (Purely seamless radial starlight aura)
           */}
           <div
-            className={`absolute -inset-10 -z-10 rounded-full blur-[70px] pointer-events-none transition-opacity duration-500 ${
-              isDragging ? "opacity-100 scale-125" : isHovered ? "opacity-90" : "opacity-75"
-            }`}
+            className="absolute -inset-6 sm:-inset-10 -z-10 rounded-full blur-[50px] sm:blur-[70px] pointer-events-none opacity-75"
             style={{
               background:
                 "radial-gradient(ellipse 65% 65% at 50% 45%, rgba(6, 182, 212, 0.32) 0%, rgba(139, 92, 246, 0.26) 45%, transparent 75%)",
@@ -94,7 +118,7 @@ export function FloatingAstronaut({
 
           {/* Secondary ambient indigo thruster stardust back-bloom */}
           <div
-            className="absolute -bottom-6 -start-6 w-48 h-48 rounded-full blur-[60px] pointer-events-none opacity-60"
+            className="absolute -bottom-4 -start-4 sm:-bottom-6 sm:-start-6 w-32 sm:w-48 h-32 sm:h-48 rounded-full blur-[45px] sm:blur-[60px] pointer-events-none opacity-60"
             style={{
               background:
                 "radial-gradient(circle, rgba(99, 102, 241, 0.35) 0%, transparent 70%)",
@@ -102,62 +126,23 @@ export function FloatingAstronaut({
           />
 
           {/* 
-            Layer 3: Interactive Framer Motion Drag Physics Container
-            Grab and throw or drag the astronaut across the screen!
+            Layer 3: Non-draggable, Purely Floating Container
           */}
-          <motion.div
-            drag
-            dragConstraints={{ left: -150, right: 150, top: -100, bottom: 200 }}
-            dragElastic={0.25}
-            dragTransition={{ bounceStiffness: 260, bounceDamping: 18 }}
-            whileHover={{ scale: 1.05, cursor: "grab" }}
-            whileDrag={{ scale: 1.12, cursor: "grabbing" }}
-            onHoverStart={() => setIsHovered(true)}
-            onHoverEnd={() => setIsHovered(false)}
-            onDragStart={() => setIsDragging(true)}
-            onDragEnd={() => setIsDragging(false)}
-            className="relative pointer-events-auto touch-none cursor-grab active:cursor-grabbing flex flex-col items-center group"
+          <div
+            className="relative pointer-events-none flex flex-col items-center max-w-full"
             style={{
               width: size,
-              maxWidth: "92vw",
+              maxWidth: "88vw",
             }}
           >
-            {/* Interactive Orbit Hint Tooltip */}
-            <AnimatePresence>
-              {(isHovered || isDragging) && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10, scale: 0.9 }}
-                  animate={{ opacity: 1, y: -8, scale: 1 }}
-                  exit={{ opacity: 0, y: 6, scale: 0.92 }}
-                  transition={{ duration: 0.22, ease: "easeOut" }}
-                  className="absolute -top-12 z-30 pointer-events-none px-3.5 py-1.5 rounded-full bg-space-950/90 backdrop-blur-xl border border-nebula-cyan/40 shadow-xl shadow-nebula-cyan/20 text-xs font-mono text-slate-100 flex items-center gap-2 whitespace-nowrap"
-                >
-                  {isDragging ? (
-                    <>
-                      <Sparkles className="w-3.5 h-3.5 text-nebula-cyan animate-spin" />
-                      <span className="text-nebula-cyan font-semibold">Zero-G Trajectory / مدار انعدام الجاذبية</span>
-                    </>
-                  ) : (
-                    <>
-                      <Move className="w-3.5 h-3.5 text-nebula-cyan animate-pulse" />
-                      <span>🚀 Drag me across orbit! / اسحبني في الفضاء</span>
-                    </>
-                  )}
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-            {/* Lottie Vector Astronaut (Customized Cosmic Edition) */}
-            <div className="w-full aspect-square drop-shadow-[0_20px_45px_rgba(6,182,212,0.25)] transition-all duration-300">
-              <LottiePlayer
-                src="/lottie/floating_beyond.json"
-                loop
-                autoplay
-                speed={0.55}
-                className="w-full h-full object-contain pointer-events-none"
+            {/* 100% Transparent Hardware-Accelerated Cosmic Video */}
+            <div className="w-full aspect-[856/1072] transition-all duration-300 pointer-events-none relative flex items-center justify-center">
+              <TransparentCosmicVideo
+                src="/videos/ahmed_cosmic_hero.mp4"
+                className="w-full h-full"
               />
             </div>
-          </motion.div>
+          </div>
         </motion.div>
       </motion.div>
     </div>

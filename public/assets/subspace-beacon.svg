@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 500" width="100%" height="100%" fill="none">
+  <defs>
+    <!-- Cyan & Violet Core Radial Glow -->
+    <radialGradient id="beaconGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.45" />
+      <stop offset="45%" stop-color="#8b5cf6" stop-opacity="0.25" />
+      <stop offset="100%" stop-color="#030712" stop-opacity="0" />
+    </radialGradient>
+
+    <!-- Pulse Gradient -->
+    <linearGradient id="beamGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.9" />
+      <stop offset="50%" stop-color="#8b5cf6" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#3b82f6" stop-opacity="0.2" />
+    </linearGradient>
+
+    <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#06b6d4" stop-opacity="0.8" />
+      <stop offset="50%" stop-color="#a855f7" stop-opacity="0.4" />
+      <stop offset="100%" stop-color="#06b6d4" stop-opacity="0.1" />
+    </linearGradient>
+
+    <!-- Filter for soft neon glow -->
+    <filter id="softGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Ambient Backdrop Halo -->
+  <circle cx="300" cy="250" r="180" fill="url(#beaconGlow)" />
+
+  <!-- Concentric Orbital Transmission Rings -->
+  <circle cx="300" cy="250" r="220" stroke="#06b6d4" stroke-opacity="0.12" stroke-width="1.5" stroke-dasharray="6 8" />
+  <circle cx="300" cy="250" r="175" stroke="url(#ringGrad)" stroke-width="1.5" stroke-dasharray="12 12" />
+  <circle cx="300" cy="250" r="130" stroke="#8b5cf6" stroke-opacity="0.25" stroke-width="1.5" />
+  <circle cx="300" cy="250" r="90" stroke="#06b6d4" stroke-opacity="0.4" stroke-width="2" stroke-dasharray="4 6" />
+  <circle cx="300" cy="250" r="55" stroke="url(#beamGrad)" stroke-width="2" filter="url(#softGlow)" />
+
+  <!-- Radiating Beam Vectors (Subspace Channels) -->
+  <g stroke="rgba(255, 255, 255, 0.15)" stroke-width="1">
+    <!-- Diagonal Crosshairs -->
+    <line x1="120" y1="70" x2="480" y2="430" stroke-dasharray="4 8" />
+    <line x1="120" y1="430" x2="480" y2="70" stroke-dasharray="4 8" />
+    <!-- Orthogonal Axes -->
+    <line x1="300" y1="20" x2="300" y2="480" stroke-opacity="0.2" />
+    <line x1="70" y1="250" x2="530" y2="250" stroke-opacity="0.2" />
+  </g>
+
+  <!-- High-Precision Telemetry Angle Ticks -->
+  <g stroke="#06b6d4" stroke-width="1.5" stroke-opacity="0.6">
+    <line x1="300" y1="26" x2="300" y2="38" />
+    <line x1="300" y1="462" x2="300" y2="474" />
+    <line x1="76" y1="250" x2="88" y2="250" />
+    <line x1="512" y1="250" x2="524" y2="250" />
+    <!-- 45 Deg Ticks -->
+    <line x1="142" y1="92" x2="152" y2="102" />
+    <line x1="448" y1="398" x2="458" y2="408" />
+    <line x1="142" y1="408" x2="152" y2="398" />
+    <line x1="448" y1="102" x2="458" y2="92" />
+  </g>
+
+  <!-- Central Quantum Emitter Core -->
+  <circle cx="300" cy="250" r="28" fill="#090e1a" stroke="#06b6d4" stroke-width="2.5" filter="url(#softGlow)" />
+  <circle cx="300" cy="250" r="14" fill="#06b6d4" />
+  <circle cx="300" cy="250" r="6" fill="#ffffff" />
+
+  <!-- Pulsing Orbiting Node 1 (Alpha Satellite) -->
+  <g transform="translate(420, 155)">
+    <circle cx="0" cy="0" r="9" fill="#0c1424" stroke="#06b6d4" stroke-width="1.5" />
+    <circle cx="0" cy="0" r="4" fill="#06b6d4" />
+    <!-- Telemetry Label -->
+    <rect x="14" y="-12" width="75" height="20" rx="4" fill="#090d16" stroke="rgba(6,182,212,0.3)" stroke-width="1" />
+    <text x="20" y="2" fill="#67e8f9" font-family="monospace" font-size="9" font-weight="700">CH-01: OK</text>
+  </g>
+
+  <!-- Pulsing Orbiting Node 2 (Beta Satellite) -->
+  <g transform="translate(170, 340)">
+    <circle cx="0" cy="0" r="8" fill="#0c1424" stroke="#8b5cf6" stroke-width="1.5" />
+    <circle cx="0" cy="0" r="3.5" fill="#8b5cf6" />
+    <!-- Telemetry Label -->
+    <rect x="-85" y="-10" width="75" height="20" rx="4" fill="#090d16" stroke="rgba(139,92,246,0.3)" stroke-width="1" />
+    <text x="-79" y="4" fill="#c084fc" font-family="monospace" font-size="9" font-weight="700">SYNC: 1420M</text>
+  </g>
+
+  <!-- Pulsing Orbiting Node 3 (Gamma Satellite) -->
+  <g transform="translate(450, 320)">
+    <circle cx="0" cy="0" r="7" fill="#0c1424" stroke="#10b981" stroke-width="1.5" />
+    <circle cx="0" cy="0" r="3" fill="#10b981" />
+    <text x="12" y="4" fill="#34d399" font-family="monospace" font-size="8" font-weight="700">ACTIVE</text>
+  </g>
+
+  <!-- Bottom Frequency & Handshake Protocol Strip -->
+  <g transform="translate(175, 435)">
+    <rect x="0" y="0" width="250" height="28" rx="14" fill="#080e1c" stroke="rgba(255,255,255,0.12)" stroke-width="1" />
+    <circle cx="16" cy="14" r="4" fill="#10b981" />
+    <text x="30" y="18" fill="#94a3b8" font-family="monospace" font-size="10" font-weight="600">BEACON // LATENCY &lt; 20MS</text>
+  </g>
+</svg>
