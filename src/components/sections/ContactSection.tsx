@@ -309,7 +309,7 @@ export function ContactSection() {
                       {isAr ? "تحميل السيرة الذاتية (CV)" : "Download Curriculum Vitae (PDF)"}
                     </span>
                     <span className="text-xs font-mono text-slate-400">
-                      Ahmed_Ragab_CV.pdf • 508 KB (2026)
+                      Ahmed_Ragab_CV.pdf • 486 KB (2026)
                     </span>
                   </div>
                 </div>
