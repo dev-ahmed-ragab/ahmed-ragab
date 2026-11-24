@@ -20,8 +20,8 @@ export const siteConfig = {
     en: "Full-Stack Product Engineer crafting scalable systems, high-performance web applications, and intuitive digital experiences across Next.js, TypeScript, and modern web architectures.",
     ar: "مهندس منتجات برمجية متخصص في بناء أنظمة سحابية قابلة للتوسع وتطبيقات ويب فائقة الأداء باستخدام Next.js و TypeScript وأحدث معايير الويب.",
   },
-  url: "https://ahmedragab.vercel.app",
-  ogImage: "https://ahmedragab.vercel.app/assets/astronaut.jpg",
+  url: "https://eng-ahmed-ragab.vercel.app",
+  ogImage: "https://eng-ahmed-ragab.vercel.app/assets/astronaut.jpg",
   email: "ahmedragab.pro@outlook.com",
   phone: "(+20) 01096097617",
   location: {
